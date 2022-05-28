@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <link rel="stylesheet" href="../public/styles/bulma.css"> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.1.1/css/all.css"
+      integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ"
+      crossorigin="anonymous"
+    />
+
+    <title>Crud Page</title>
+  </head>
+  <body>
+  <div class="container">
+  
+    <section class="section">
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="/">
+     Home
+    </a>
+  </div>
+
+  <div id="navbarBasicExample" class="navbar-menu">
+    <div class="navbar-start">
+     
+     
+
+        <a class="navbar-item" href="/crud">
+          Create User 
+        </a>
+        <a class="navbar-item" href="/get-crud">
+          User Info
+        </a>
+      
+    </div>
+
+    
+  </div>
+</nav>
+      <h1 class="title">Create New User</h1>
+      <form action="/post-crud" method="post">
+      
+      <div class="columns">
+        <div class="column">
+          <div class="field">
+            <label class="label" for="Fname"> Full Name</label>
+            <div class="control has-icons-left">
+              <input class="input" type="text" placeholder="Insert Name" name="Fname"  />
+              <span class="icon is-small is-left">
+                <i class="fas fa-user"></i>
+              </span>
+            </div>
+          </div>
+
+         
+
+          <div class="field">
+            <label class="label">Email</label>
+            <div class="control has-icons-left has-icons-right">
+              <input class="input" type="email" placeholder="Insert Email" name="email"  />
+              <span class="icon is-small is-left">
+                <i class="fas fa-envelope"></i>
+              </span>
+              <!-- <span class="icon is-small is-right">
+      <i class="fas fa-exclamation-triangle"></i>
+    </span> -->
+            </div>
+            <!-- <p class="help is-danger">This email is invalid</p> -->
+          </div>
+        </div>
+        <div class="column">
+          <div class="field">
+            <label class="label">Phone Number</label>
+            <div class="control has-icons-left">
+              <input
+                class="input"
+                type="number"
+                placeholder="Insert Number"
+                name="phone"
+                min="10"
+                
+              />
+              <span class="icon is-small is-left">
+                <i class="fas fa-mobile"></i>
+              </span>
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">Address</label>
+            <div class="control has-icons-left">
+              <input
+                class="input"
+                type="text"
+                placeholder="Insert Address"
+                name="address"
+                
+              />
+              <span class="icon is-small is-left">
+                <i class="fas fa-address-book"></i>
+              </span>
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">Password</label>
+            <div class="control has-icons-left has-icons-right">
+              <input
+                class="input"
+                type="password"
+                placeholder="Insert Password"
+                name="password"
+                
+              />
+              <span class="icon is-small is-left">
+                <i class="fas fa-lock"></i>
+              </span>
+              <span class="icon is-small is-right">
+                <i class="fas fa-eye"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="column">
+          <!-- <div class="field">
+            <label for="#" class="label">Avatar</label>
+            <div class="control">
+              <div class="file">
+                <label class="file-label">
+                  <input class="file-input" type="file" name="image" />
+                  <span class="file-cta">
+                    <span class="file-icon">
+                      <i class="fas fa-upload"></i>
+                    </span>
+                    <span class="file-label"> Choose a file… </span>
+                  </span>
+                </label>
+              </div>
+            </div>
+          </div> -->
+              <div class="field">
+                <label class="label">Gender</label>
+                <div class="control">
+                  <label class="radio">
+                    <input type="radio" name="gender" value="1" />
+                    Male
+                  </label>
+                  <label class="radio">
+                    <input type="radio" name="gender" value="0" />
+                    Female
+                  </label>
+                </div>
+              </div>
+              <div class="field"style='margin-top:26px'>
+                <label class="label">Role</label>
+                <div class="select">
+                  <select name="role">
+                    <option value="1">Admin</option>
+                    <option value="2">Doctor</option>
+                    <option value="3">Patient</option>
+                  </select>
+                </div>
+              </div>
+        </div>
+      </div>
+
+      <div class="field is-centered">
+        <div class="control">
+          <button class="button is-link">Submit</button>
+          <input type="submit"style='display: none;'>
+        </div>
+      </div>
+      </form>
+    </section>
+  </div>
+  </body>
+</html>

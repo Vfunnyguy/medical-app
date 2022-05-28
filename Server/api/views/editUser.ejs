@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit User</title>
+  </head>
+  <body>
+    <%- include ('layout.ejs') %>
+    <div class="container">
+      <h1>Edit User Info</h1>
+      <div class="row">
+        <form action="/put-crud" method="POST" class="col s12">
+          <div class="row">
+            <div class="input-field col s6">
+              <i class="material-icons prefix">account_circle</i>
+              <input
+                type="text"
+                name="Fname"
+                class="validate"
+                id="fname"
+                value="<%=
+              userInfo.fullName
+              %>"
+              />
+              <label for="fname">Full Name</label>
+            </div>
+            
+            <div class="input-field col s6">
+              <i class="material-icons prefix">mail</i>
+              <input
+                type="email"
+                name="email"
+                class="validate"
+                id="email"
+                value="<%=
+              userInfo.email
+              %>"
+              />
+              <label for="email">Email</label>
+            </div>
+            <div class="input-field col s6">
+              <i class="material-icons prefix">phone</i>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                class="validate"
+                value="<%=
+              userInfo.phoneNumber
+              %>"
+              />
+              <label for="phone">Telephone</label>
+            </div>
+            <div class="input-field col s6">
+              <i class="material-icons prefix">place</i>
+              <input
+                type="text"
+                id="address"
+                name="address"
+                class="validate"
+                value="<%=
+              userInfo.address
+              %>"
+              />
+              <label for="address">Address</label>
+            </div>
+            <input
+              name="id"
+              type="text"
+              value="
+      <%= userInfo.id %>"
+              hidden
+            />
+          </div>
+          <div class="col s6">
+            <button class="waves-effect waves-light btn">
+              Update <i class="material-icons right">send</i>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
