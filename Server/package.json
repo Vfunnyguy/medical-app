@@ -1,11 +1,12 @@
 {
-  "name": "Server",
+  "name": "server-api",
   "version": "1.0.0",
   "description": "api server",
   "main": "index.js",
   "repository": "https://github.com/Vfunnyguy/medical-app.git",
    "scripts": {
-    "start": "nodemon --exec babel-node src/index.js"
+    "start": "nodemon --exec babel-node api/index.js",
+    "dev":"nodemon api/index.js"
   },
   "author": "Nguyễn Hoàng Việt",
   "license": "ISC",
