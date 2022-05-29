@@ -15,12 +15,3 @@ export function checkEmailValid(UserEmail) {
     }
   });
 }
-export function compareUserPass(userPass){
-return new Promise(async(resolve, reject) => { 
-   try {
-       
-   } catch (error) {
-       reject(error)
-   }
- })
-}

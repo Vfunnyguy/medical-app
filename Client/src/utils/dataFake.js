@@ -5,7 +5,7 @@ export const fakeData = [
     doc: [
       {
         id: 1,
-        docName: 'Johny Sin',
+        docName: 'teafd',
         specs: 'women',
         avatar:'https://ih1.redbubble.net/image.664756783.1475/pp,550x550.jpg'
       },
