@@ -1,5 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
+import cors from 'cors'
+import morgan from 'morgan'
 import viewEngine from "./config/viewEngine";
 import initWebRoutes from './routes/route';
 import connectDb from './config/connectDB'
@@ -8,9 +10,10 @@ require('dotenv').config();
 let app = express();
 
 //config app
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(cors())
+app.use(morgan('dev'))
 
 viewEngine(app);
 initWebRoutes(app);
