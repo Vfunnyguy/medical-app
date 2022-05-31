@@ -8,11 +8,11 @@ import connectDb from './config/connectDB'
 require('dotenv').config();
 
 let app = express();
+app.use(cors({origin:true}))
 
 //config app
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }))
-app.use(cors())
 app.use(morgan('dev'))
 
 viewEngine(app);

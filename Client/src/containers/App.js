@@ -48,13 +48,13 @@ class App extends Component {
                         <ConfirmModal />
                         {this.props.isLoggedIn && <Header />}
 
-                        <span className="content-container">
+                        <main className="container">
                             <Switch>
                                 <Route path={path.HOME} exact component={(Home)} />
                                 <Route path={path.LOGIN} component={userIsNotAuthenticated(Login)} />
                                 <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
                             </Switch>
-                        </span>
+                        </main>
 
                         <ToastContainer
                             className="toast-container" toastClassName="toast-item" bodyClassName="toast-item-body"

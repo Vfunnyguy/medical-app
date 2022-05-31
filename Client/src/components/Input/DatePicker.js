@@ -3,7 +3,7 @@ import Flatpickr from 'react-flatpickr';
 import moment from 'moment';
 
 import { KeyCodeUtils } from "../../utils";
-import './DatePicker.scss';
+// import './DatePicker.scss';
 
 // const CustomInput = ({ value, defaultValue, inputRef, onInputChange, onInputBlur, ...props }) => {
 //     return <input {...props} className='custom-form-control custom-date-input' defaultValue={defaultValue} ref={inputRef}

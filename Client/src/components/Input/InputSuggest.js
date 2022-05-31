@@ -3,7 +3,7 @@ import Autosuggest from 'react-autosuggest';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
-import "./InputSuggest.scss";
+// import "./InputSuggest.scss";
 
 const isAlphaNumericChar = keycode => {
     return (keycode >= 48 && keycode <= 57) || (keycode >= 65 && keycode <= 90);

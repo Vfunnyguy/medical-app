@@ -11,6 +11,7 @@ return new Promise(async(resolve, reject) => {
           let user=await db.User.findOne({
               attributes:['id','email','roleID','fullName','address',"password","phoneNumber",],
               where:{email:email},
+              raw:true
              
           })
           if(user){
@@ -18,7 +19,7 @@ return new Promise(async(resolve, reject) => {
              if(checkPass){
                  userData.errCode=0;
                  userData.errMessage="Login success";
-                 delete user.dataValues.password;
+                 delete user.password;
                  userData.user=user;
              }else{
                  userData.errCode=3
@@ -38,4 +39,28 @@ return new Promise(async(resolve, reject) => {
       reject(e)
   }
  })
+}
+
+export const getAllUser=(userID)=>{
+    return new Promise(async(resolve, reject) => { 
+        try {
+            let userData=[]
+            if(userID==='ALL'){
+                userData=await db.User.findAll({
+                    attributes:['id','email','roleID','fullName','address',"phoneNumber",],
+                    raw:true
+                })
+            }if(userID&&userID!=='ALL'){
+                userData=await db.User.findOne({
+                    attributes:['id','email','roleID','fullName','address',"phoneNumber",],
+                    where:{id:userID},
+                    raw:true
+                })
+            }
+            resolve(userData)
+        } catch (e) {
+            reject(e)
+        }
+     })
+
 }

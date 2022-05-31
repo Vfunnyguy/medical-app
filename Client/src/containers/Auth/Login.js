@@ -1,21 +1,21 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { push } from "connected-react-router";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { push } from 'connected-react-router';
 // import * as actions from "../store/actions";
-import * as actions from "../../store/actions";
-
-// import { FormattedMessage } from "react-intl";
+import * as actions from '../../store/actions';
+import { wel_img } from '../../utils/img';
+import { FormattedMessage } from "react-intl";
 // import { userService } from '../../services/userService';
-import { handleLoginApi } from "../../services/userService";
+import { handleLoginApi } from '../../services/userService';
 
 class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "",
-      password: "",
+      username: '',
+      password: '',
       showPassword: false,
-      errMessage: "",
+      errMessage: '',
     };
   }
 
@@ -33,7 +33,7 @@ class Login extends Component {
 
   handleLogin = async () => {
     this.setState({
-      errMessage: "",
+      errMessage: '',
     });
     try {
       let data = await handleLoginApi(this.state.username, this.state.password);
@@ -44,7 +44,7 @@ class Login extends Component {
       }
       if (data && data.errCode === 0) {
         this.props.userLoginSuccess(data.user);
-        console.log("loging success");
+        console.log('login success');
       }
     } catch (e) {
       if (e.response) {
@@ -54,7 +54,7 @@ class Login extends Component {
           });
         }
       }
-      console.log("error message", e.response);
+      console.log('error message', e.response);
     }
   };
 
@@ -62,50 +62,65 @@ class Login extends Component {
     this.setState({
       showPassword: !this.state.showPassword,
     });
-    console.log(this.state.showPassword);
+    // console.log(this.state.showPassword);
   };
 
   render() {
     return (
-      <div className="login-page container">
-        <form className="box">
-          <h1 className="title"> Login</h1>
-          <div className="field">
-            <label className="label">Email</label>
-            <div className="control">
-              <input
-                className="input"
-                type="email"
-                placeholder="e.g. alex@example.com"
-              />
-            </div>
-          </div>
-
-          <div className="field">
-            <label className="label">Password</label>
-            <div className="control has-icons-right">
-              <input
-                className="input"
-                placeholder="********"
-                type={this.state.showPassword ? "text" : "password"} 
-                value={this.state.password}
-                onChange={(e) => this.handleOnChangePassword(e)}
-              />
-              <span
-                className="icon is-small is-right"
-                onClick={() => this.handleShowHidePassword()}
-              >
-                <i
-                  className={
-                    this.state.showPassword ? "fas fa-eye " : "fas fa-eye-slash"
-                  }
-                ></i>
+      <div className="login-page  ">
+        <section className="columns is-vertical">
+          <div className="column login-page__form pt-5">
+            <div className="box mgt-medium">
+              <span className="center">
+                <h1 className="title"> Login</h1>
               </span>
+              <div className="field">
+                <label className="label">Email</label>
+                <div className="control">
+                  <input
+                    className="input"
+                    type="text"
+                    placeholder="Insert your email"
+                    value={this.state.username}
+                    onChange={(e) => this.handleOnChangeUserName(e)}
+                  />
+                </div>
+               
+              </div>
+
+              <div className="field ">
+                <label className="label">Password</label>
+                <div className="control has-icons-right ">
+                  <input
+                    className="input"
+                    placeholder="Insert your pasword"
+                    type={this.state.showPassword ? 'text' : 'password'}
+                    value={this.state.password}
+                    onChange={(e) => this.handleOnChangePassword(e)}
+                  />
+                  <span
+                    className=" login-page__pass icon is-small is-right  "
+                    style={{ pointerEvent: 'auto' }}
+                    onClick={() => this.handleShowHidePassword()}
+                  >
+                    <i
+                      className={this.state.showPassword ? 'fas fa-eye ' : 'fas fa-eye-slash '}
+                    ></i>
+                  </span>
+                </div>
+                 <p class="help is-danger"> {this.state.errMessage}</p>
+              </div>
+              <div className="center">
+                <button onClick={() => this.handleLogin()} className="button is-info w100"style={{fontWeight:700,fontSize:'20px'}}>
+                  Sign in
+                </button>
+              </div>
             </div>
           </div>
-
-          <button className="button is-primary">Sign in</button>
-        </form>
+          <div className="column is-hidden-mobile">
+            <img src={wel_img} alt="welcome img" />
+          </div>
+        </section>
       </div>
     );
   }
@@ -121,65 +136,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     navigate: (path) => dispatch(push(path)),
     // userLoginFail: () => dispatch(actions.adminLoginFail()),
-    userLoginSuccess: (userInfo) =>
-      dispatch(actions.userLoginSuccess(userInfo)),
+    userLoginSuccess: (userInfo) => dispatch(actions.userLoginSuccess(userInfo)),
   };
 };
-/* 
- <div className="login-background">
-                <div className="login-container">
-                    <div className="login-content row">
-                        <div className="col-12 text-center login-title">Login</div>
-                        <div className="col-12 form-group">
-                            <label>Username: </label>
-                            <input
-                                type="text"
-                                className="form-control login-input"
-                                placeholder="Enter your user name"
-                                value={this.state.username}
-                                onChange={(e) => this.handleOnChangeUserName(e)}
-
-                            />
-
-                        </div>
-                        <div className="col-12 form-group">
-                            <label>Password: </label>
-                            <div className="login-password">
-                                <input
-                                   
-                                    className="form-control login-input"
-                                    placeholder="Enter your password"
-                                   
-
-                                />
-                                <span>
-                                    <i className={this.state.showPassword ? 'fas fa-eye show-password' : 'fas fa-eye-slash show-password'} ></i>
-                                </span>
-                            </div>
-                        </div>
-                        <div className="col-12" style={{ color: 'red' }}>
-                            {this.state.errMessage}
-                        </div>
-                        <div className="col-12">
-                            <button
-                                className="btn-login"
-                                onClick={() => this.handleLogin()}
-                            >Login</button>
-                        </div>
-                        <div className="col-12">
-                            <span className="forgot-password">Forgot your password?</span>
-                        </div>
-                        <div className="col-12 text-center login-with mt-3">
-                            <span className="">Or login with:</span>
-                        </div>
-                        <div className="col-12 social-login">
-                            <i className="fab fa-facebook social-icon fb"></i>
-                            <i className="fab fa-google-plus social-icon gg"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
- */
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

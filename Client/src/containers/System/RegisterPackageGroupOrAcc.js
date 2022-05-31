@@ -12,7 +12,7 @@ class RegisterPackageGroupOrAcc extends Component {
 
     render() {
         return (
-            <div className="text-center">
+            <div className="center">
                 register package group or account
             </div>)
     }

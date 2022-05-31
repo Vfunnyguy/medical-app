@@ -10,14 +10,14 @@ class MenuGroup extends Component {
     render() {
         const { name, children } = this.props;
         return (
-            <li className="menu-group">
-                <div className="menu-group-name">
+            <div className="navbar-item has-dropdown is-hoverable has-text-white">
+                <div className="menu-group-name ">
                     <FormattedMessage id={name} />
                 </div>
-                <ul className="menu-list list-unstyled">
+                <ul className="navbar-dropdown has-text-black center ">
                     {children}
                 </ul>
-            </li>
+            </div>
         );
     }
 }
@@ -32,7 +32,7 @@ class Menu extends Component {
                     <Fragment>
                         <span
                             data-toggle="collapse"
-                            className={"menu-link collapsed"}
+                            className={"menu-link collapsed is-hidden"}
                             onClick={onClick}
                             aria-expanded={"false"}
                         >
@@ -42,7 +42,7 @@ class Menu extends Component {
                             </div>
                         </span>
                         <div>
-                            <ul className="sub-menu-list list-unstyled">
+                            <ul className="menu-link">
                                 {children}
                             </ul>
                         </div>
@@ -66,7 +66,7 @@ class SubMenu extends Component {
     render() {
         const { name, link, onLinkClick } = this.props;
         return (
-            <li className={"sub-menu " + this.getItemClass(link)}>
+            <li className={"navbar-item " + this.getItemClass(link)}>
                 <Link to={link} className="sub-menu-link" onClick={onLinkClick}>
                     <FormattedMessage id={name} />
                 </Link>
@@ -188,7 +188,7 @@ class Navigator extends Component {
         const { menus, location, onLinkClick } = this.props;
         return (
             <Fragment>
-                <ul className="navigator-menu list-unstyled">
+                <div className="navigator-menu list-unstyled">
                     {
                         menus.map((group, groupIndex) => {
                             return (
@@ -227,7 +227,7 @@ class Navigator extends Component {
                             );
                         })
                     }
-                </ul>
+                </div>
             </Fragment>
         );
     }
