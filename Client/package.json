@@ -7,6 +7,7 @@
     "@emotion/styled": "^11.8.1",
     "@formatjs/intl-pluralrules": "^3.5.6",
     "@formatjs/intl-relativetimeformat": "^7.3.6",
+    "@mui/icons-material": "^5.8.2",
     "@mui/material": "^5.8.1",
     "axios": "^0.21.1",
     "connected-react-router": "^6.9.1",

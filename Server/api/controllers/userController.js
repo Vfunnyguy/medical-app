@@ -1,4 +1,4 @@
-import { handleUserLogin ,getAllUser} from "../service/service__User";
+import { handleUserLogin ,getAllUser,createUser,editUser} from "../service/service__User";
 
 export const handleLogin = async (req, res) => {
   let { email, password } = req.body;
@@ -16,7 +16,7 @@ export const handleLogin = async (req, res) => {
   });
 };
 export const handleGetAllUser = async (req, res) => {
-  var id=req.body.id
+  var id=req.query.id
   if(!id){
     return res.status(500).json({
       errCode:1,
@@ -30,4 +30,17 @@ export const handleGetAllUser = async (req, res) => {
     errMessage:"Get all user success",
     userData
   })
+};
+export async function handleCreateUser(req,res){
+ let user=await createUser(req.body)
+ return res.status(200).json({
+   user
+ })
+} 
+export const handleEditUser = async (req, res) => {
+
+}
+export var deleteUser = async (req, res) => {
+
+  
 }
