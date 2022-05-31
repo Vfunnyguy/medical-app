@@ -1,0 +1,16 @@
+.login-page{
+    margin-top: 60px;
+    &__pass{
+        .icon{
+            
+        pointer-events: auto;
+        }
+    }
+    img{
+        width: 100%;
+        height: auto;
+    }
+}
+.btn-logout{
+    margin-top: 10px;
+}
