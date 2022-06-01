@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { getAllUserApi } from '../../services/userService';
+// import Modal from './crud/modal';
+// import CrudForm from './crud/crudForm';
 class UserManage extends Component {
   constructor(props) {
     super(props);
@@ -22,6 +24,7 @@ class UserManage extends Component {
     let allUser = this.state.allUser;
     return (
       <div className="manage__user-page ">
+      
         <div className="container has-text-centered">
           <div className="columns is-mobile is-centered">
             <div className="column is-8">
@@ -76,6 +79,7 @@ class UserManage extends Component {
             </button>
           </div>
         </div>
+      {/* <CrudForm/> */}
       </div>
     );
   }

@@ -39,19 +39,19 @@ class HeaderHome extends Component {
           <div className="navbar-end">
             <div className="navbar-item">
               <div className="control has-icons-left">
-              <input className="input" type="text" placeholder="Search" />
+              <input className="input" type="text" placeholder="Tìm Kiếm" />
                <span className='icon is-small is-left'>
                <i class="fas fa-search    "></i>
                </span>
               </div>
             </div>
-            <div className="navbar-item has-dropdown is-hoverable">
+            {/* <div className="navbar-item has-dropdown is-hoverable">
               <Link className="navbar-link"><i class="fas fa-globe mt-2   "></i></Link>
               <div className="navbar-dropdown">
                 <Link className="navbar-item">VN</Link>
                 <Link className="navbar-item">EN</Link>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </nav>
