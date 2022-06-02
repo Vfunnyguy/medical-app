@@ -15,7 +15,7 @@ const Banner = () => {
         cursorColor="#fff"
         multiText={[
           'Medical Booking',
-          'Nền tảng Y Tế chăm sóc sức khỏe toàn  diện  ',
+          'Nền tảng Y Tế chăm sóc sức khỏe ',
           'Đặt Lịch Khám',
           'Tận Tình Chu Đáo',
           'Chuyên  Sâu và Tổng Quát',
