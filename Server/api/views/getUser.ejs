@@ -13,6 +13,7 @@
       <table class="responsive-table highlight">
         <thead>
           <tr>
+          <th>ID</th>
             <th>Email</th>
             <th>Full Name</th>
             <th>Phone</th>
@@ -27,6 +28,7 @@
         <tbody>
           <% for(let i=0; i < userTable.length; i++) { %>
           <tr>
+            <td><%= userTable[i].id %></td>
             <td><%= userTable[i].email %></td>
             <td><%= userTable[i].fullName %></td>
             <td><%= userTable[i].phoneNumber %></td>

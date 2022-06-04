@@ -4,7 +4,7 @@ import { push } from 'connected-react-router';
 // import * as actions from "../store/actions";
 import * as actions from '../../store/actions';
 import { wel_img } from '../../utils/img';
-import { FormattedMessage } from "react-intl";
+
 // import { userService } from '../../services/userService';
 import { handleLoginApi } from '../../services/userService';
 
@@ -62,21 +62,21 @@ class Login extends Component {
     this.setState({
       showPassword: !this.state.showPassword,
     });
-    // console.log(this.state.showPassword);
   };
 
   render() {
     return (
       <div className="login-page  ">
-        <section className="columns is-vertical">
-          <div className="column login-page__form pt-5">
-            <div className="box mgt-medium">
-              <span className="center">
-                <h1 className="title"> Login</h1>
-              </span>
+        <div className="columns is-vcentered">
+          <div className="login column is-4 ">
+            <section className="section">
+              <div className="has-text-centered">
+                <span className="is-uppercase title a1">Login</span>
+              </div>
+
               <div className="field">
-                <label className="label">Email</label>
-                <div className="control">
+                <label className="label">Username</label>
+                <div className="control has-icons-right">
                   <input
                     className="input"
                     type="text"
@@ -84,13 +84,15 @@ class Login extends Component {
                     value={this.state.username}
                     onChange={(e) => this.handleOnChangeUserName(e)}
                   />
+                  <span className="icon is-small is-right">
+                    <i className="fa fa-user"></i>
+                  </span>
                 </div>
-               
               </div>
 
-              <div className="field ">
+              <div className="field">
                 <label className="label">Password</label>
-                <div className="control has-icons-right ">
+                <div className="control has-icons-right">
                   <input
                     className="input"
                     placeholder="Insert your pasword"
@@ -110,17 +112,20 @@ class Login extends Component {
                 </div>
                  <p class="help is-danger"> {this.state.errMessage}</p>
               </div>
-              <div className="center">
-                <button onClick={() => this.handleLogin()} className="button is-info w100"style={{fontWeight:700,fontSize:'20px'}}>
-                  Sign in
+              <div className="has-text-centered">
+                <button
+                  className="button is-vcentered is-info is-outlined w100 fw-bold "
+                  onClick={() => this.handleLogin()}
+                >
+                  Login
                 </button>
               </div>
-            </div>
+            </section>
           </div>
-          <div className="column is-hidden-mobile">
-            <img src={wel_img} alt="welcome img" />
+          <div className="interactive-bg column is-8">
+            <img className="login-logo" src={wel_img} alt="login_img" />
           </div>
-        </section>
+        </div>
       </div>
     );
   }

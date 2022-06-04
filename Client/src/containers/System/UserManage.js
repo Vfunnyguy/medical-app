@@ -1,10 +1,9 @@
 
 import React, { Component } from 'react';
-import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { getAllUserApi } from '../../services/userService';
-// import Modal from './crud/modal';
-// import CrudForm from './crud/crudForm';
+import { getAllUserApi,deleteUserApi } from '../../services/userService';
+import Modal from './crud/modal';
+
 class UserManage extends Component {
   constructor(props) {
     super(props);
@@ -13,11 +12,27 @@ class UserManage extends Component {
     };
   }
   async componentDidMount() {
+   this.getAllUserFunc()
+  }
+  getAllUserFunc=async()=>{
     let res = await getAllUserApi('ALL');
     if (res && res.errCode === 0) {
       this.setState({ allUser: res.userData });
     }
-    console.log(res);
+  }
+
+  handleDelete= async(user)=>{
+    console.log('delete',user);
+    try {
+      var u=await deleteUserApi(user.id);
+      if(u&&u.errCode===0){
+      await  this.getAllUserFunc()
+      }else{
+        alert(u.errMessage);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   render() {
@@ -35,6 +50,7 @@ class UserManage extends Component {
               <table className="table is-bordered is-fullwidth is-hoverable ml-2">
                 <thead>
                   <tr style={{ background: '#00d1b2', color: '#fff' }}>
+                  <th>Id</th>
                     <th>Username</th>
                     <th>Email</th>
                     <th>Address</th>
@@ -47,17 +63,18 @@ class UserManage extends Component {
                     allUser.map((item, index) => {
                       return (
                         <tr key={index}>
+                          <td>{item.id}</td>
                           <td>{item.fullName}</td>
                           <td>{item.email}</td>
                           <td>{item.address}</td>
                           <td>{item.phoneNumber}</td>
                           <td>
-                            <button className="button is-primary mr-2 ">
+                            <button className="button is-primary mr-2 has-text-white ">
                               <span className="icon is-small">
                                 <i class="fas fa-pen-fancy"></i>
                               </span>
                             </button>
-                            <button className="button is-danger ">
+                            <button className="button is-danger " onClick={()=>this.handleDelete(item)}>
                               <span className="icon is-small">
                                 <i className="fas fa-trash-alt" />
                               </span>
@@ -71,12 +88,7 @@ class UserManage extends Component {
             </div>
           </div>
           <div className="column">
-            <button className="button is-info has-icons-right">
-              <span>Create new user</span>
-              <span className=" ml-3 icon is-small icon-is-right">
-                <i className="fas fa-plus-circle    "></i>
-              </span>
-            </button>
+           <Modal/>
           </div>
         </div>
       {/* <CrudForm/> */}

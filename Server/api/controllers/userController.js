@@ -1,4 +1,4 @@
-import { handleUserLogin ,getAllUser,createUser,editUser} from "../service/service__User";
+import { handleUserLogin ,getAllUser,createUser,editUser,deleteUser} from "../service/service__User";
 
 export const handleLogin = async (req, res) => {
   let { email, password } = req.body;
@@ -37,10 +37,22 @@ export async function handleCreateUser(req,res){
    user
  })
 } 
-export const handleEditUser = async (req, res) => {
-
+export var handleEditUser = async (req, res) => {
+ let data=req.body
+ let message=await editUser(data)
+ return res.status(200).json({
+  //  errCode:0,
+   errMessage:message
+ })
 }
-export var deleteUser = async (req, res) => {
+export let handleDeleteUser = async (req, res) => {
 
-  
+  if(!req.body.id){
+    return res.status(500).json({
+      errCode:1,
+      errMessage:'Not found param',
+    })
+  }
+  let result=await deleteUser(req.body.id)
+  return res.status(200).json({result})
 }

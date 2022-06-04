@@ -6,12 +6,12 @@ import Home from '~/Home';
 function App() {
   return (
     <Router>
-      <Layout>
+      {/* <Layout> */}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="*" element={<Notfound />} />
         </Routes>
-      </Layout>
+      {/* </Layout> */}
     </Router>
   );
 }

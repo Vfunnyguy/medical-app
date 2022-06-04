@@ -20,6 +20,7 @@ import HomePage from '../pages/home';
 
 import { CustomToastCloseButton } from '../components/CustomToast';
 import ConfirmModal from '../components/ConfirmModal';
+import Footer from './footer';
 
 class App extends Component {
 
@@ -49,13 +50,14 @@ class App extends Component {
                         <ConfirmModal />
                         {this.props.isLoggedIn && <Header />}
 
-                        <main className="none">
+                        <main className="main">
                             <Switch>
                                 <Route path={path.HOME} exact component={(Home)} />
                                 <Route path={path.LOGIN} component={userIsNotAuthenticated(Login)} />
                                 <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
                                 <Route path={path.HomePage} component={(HomePage)} />
                             </Switch>
+                            <Footer/>
                         </main>
 
                         <ToastContainer

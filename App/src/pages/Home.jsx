@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
 import { auth_img } from '@/utils';
+import Login from '../components/auth/Login';
 // import { getAllUserApi } from '../redux/action/authAction';
 const Home = () => {
 
@@ -16,11 +17,13 @@ const Home = () => {
   
   return (
     <div className="home-page">
-       <Typography align='center'variant='h1'>
+       {/* <Typography align='center'variant='h1'>
        Manage User System
-       </Typography>
+       </Typography> */}
+
+       <Login/>
        <div className="img-bellow" style={{textAlign:'center'}}>
-       <img src={auth_img} alt="welcome img" style={{width:'62%'}} />
+       {/* <img src={auth_img} alt="welcome img" style={{width:'62%'}} /> */}
        </div>
          
   

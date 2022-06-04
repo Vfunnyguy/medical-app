@@ -63,27 +63,57 @@ export const getAllUser = (userID) => {
     }
   });
 };
-export const createUser =async  (user) => {
+export const createUser = async (user) => {
   return new Promise(async (resolve, reject) => {
     try {
-      await db.User.create({
-        email: user.email,
-        password: await bcrypt.hash(user.password, 10),
-        fullName: user.Fname,
-        address: user.address,
-        gender: user.gender === '1' ? true : false,
-        phoneNumber: user.phone,
-        roleID: user.role,
-      });
-      resolve({ errCode: 0, errMessage: 'create success' });
+      let checkEmail = await checkEmailValid(user.email);
+      if (checkEmail === true) {
+        resolve({
+          errCode: 1,
+          errMessage: 'Email is exist',
+        });
+      } else {
+        await db.User.create({
+          email: user.email,
+          password: await bcrypt.hash(user.password, 10),
+          fullName: user.Fname,
+          address: user.address,
+          // gender: user.gender === '1' ? true : false,
+          phoneNumber: user.phone,
+          roleID: user.role,
+        });
+        resolve({ errCode: 0, errMessage: 'create success' });
+      }
     } catch (error) {
       reject(error);
     }
   });
 };
-export async function editUser(user){
-    return new Promise(async (resolve, reject) => {
+
+export const deleteUser = (userID) => {
+  return new Promise(async (resolve, reject) => {
     try {
+      let user = await db.User.findOne({
+        where: { id: userID },
+      });
+      if (!user) {
+        resolve({ errCode: 1, errMessage: 'User not found' });
+      }
+      if (user) {
+        await user.destroy();
+      }
+      resolve({ errCode: 0, errMessage: 'Delete success' });
+    } catch (e) {
+      reject(e);
+    }
+  });
+};
+export async function editUser(data) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (!data.id) {
+        resolve({ errCode: 2, errMessage: 'missing id' });
+      }
       let user = await db.User.findOne({
         where: { id: data.id },
       });
@@ -93,15 +123,25 @@ export async function editUser(user){
         user.email = data.email;
         user.address = data.address;
         await user.save();
-        resolve()
-      }else{
-        resolve();
+        // await db.User.save({
+        //   fullName:data.Fname,
+        //   phoneNumber:data.phone,
+        //   email:data.email,
+        //   address:data.address,
+        // })
 
+        resolve({
+          errCode: 0,
+          errMessage: 'Update success',
+        });
+      } else {
+        resolve({
+          errCode: 1,
+          errMessage: 'User not found',
+        });
       }
-      //  await db.User.update({
-
-      //  })
     } catch (error) {
-      console.log(error);
-    }})
-} 
+      reject(error);
+    }
+  });
+}
