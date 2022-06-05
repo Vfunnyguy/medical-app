@@ -1,4 +1,4 @@
-import { handleUserLogin ,getAllUser,createUser,editUser,deleteUser} from "../service/service__User";
+import { handleUserLogin ,getAllUser,createUser,editUser,deleteUser,getCode} from "../service/service__User";
 
 export const handleLogin = async (req, res) => {
   let { email, password } = req.body;
@@ -55,4 +55,16 @@ export let handleDeleteUser = async (req, res) => {
   }
   let result=await deleteUser(req.body.id)
   return res.status(200).json({result})
+}
+export let getCodeApi = async (req, res) => {
+  try {
+    let data=await getCode(req.query.type)
+    return res.status(200).json(data)
+  } catch (error) {
+    console.log(error)
+    return res.status(500).json({
+      errCode:1,
+      errMessage:'Server error',
+    }) 
+  }
 }

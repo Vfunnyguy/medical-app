@@ -145,3 +145,26 @@ export async function editUser(data) {
     }
   });
 }
+export const getCode = (typeInput) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (!typeInput) {
+        resolve({
+          errCode: 1,
+          errMessage: 'missing typeInput',
+        });
+      } else {
+        let codeData = {};
+        let code = await db.Code.findAll({
+          where: { type: typeInput },
+        });
+        codeData.errCode = 0;
+        codeData.errMessage = 'Get code success';
+        codeData.data = code;
+        resolve(codeData);
+      }
+    } catch (error) {
+      reject(error);
+    }
+  });
+};

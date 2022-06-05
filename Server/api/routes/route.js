@@ -6,6 +6,7 @@ import {
   handleCreateUser,
   handleEditUser,
   handleDeleteUser,
+  getCodeApi
 } from '../controllers/userController';
 let router = express.Router();
 
@@ -22,6 +23,7 @@ let initWebRoutes = (app) => {
   router.post('/api/create-user', handleCreateUser);
   router.put('/api/editUser', handleEditUser);
   router.delete('/api/deleteUser', handleDeleteUser);
+  router.get('/api/code',getCodeApi)
 
   return app.use('/', router);
 };

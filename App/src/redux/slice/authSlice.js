@@ -4,5 +4,13 @@ export const authSlice=createSlice({
     initialState:{
       email:'',
       password:''
+    },
+    reducers:{
+      login:(state,action)=>{
+        state.email=action.payload.email;
+        state.password=action.payload.password;
+      }
     }
 })
+export const{login}=authSlice.actions;
+export default authSlice.reducer;
