@@ -9,8 +9,8 @@ import { adminMenu } from './menuApp';
 class Header extends Component {
 
     render() {
-        const { processLogout } = this.props;
-
+        const { processLogout,userInfo } = this.props;
+    console.log('userInfo',userInfo);
         return (
             <nav className="navbar fs-18 is-info">
                 {/* thanh navigator */}
@@ -19,8 +19,11 @@ class Header extends Component {
                 </div>
 
                 {/* nút logout */}
-                <div className="navbar-end  mt-3 mr-2" onClick={processLogout}>
-                    <i className="fas fa-sign-out-alt"style={{fontSize:'18px'}}></i>
+                <div className="navbar-end  mt-3 mr-2" >
+                <span className='mr-2'>
+                hello {userInfo&&userInfo.fullName?userInfo.fullName:''}
+                </span>
+                    <i className="fas fa-sign-out-alt"style={{fontSize:'18px'}}onClick={processLogout}></i>
                 </div>
             </nav>
         );
@@ -30,7 +33,8 @@ class Header extends Component {
 
 const mapStateToProps = state => {
     return {
-        isLoggedIn: state.user.isLoggedIn
+        isLoggedIn: state.user.isLoggedIn,
+        userInfo:state.user.userInfo
     };
 };
 

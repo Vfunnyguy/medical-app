@@ -7,6 +7,10 @@ import './styles/custom-mui.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
+  
     <App />
+{/* <Provider store={store}>
+</Provider> */}
+  
   </React.StrictMode>
 )

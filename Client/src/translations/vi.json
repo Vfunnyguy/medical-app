@@ -26,14 +26,10 @@
         "userpass-wrong": "Sai tên đăng nhập hoặc mật khẩu!"
     },
     "menu": {
-        "system": {
-            "header": "Hệ thống",
-            "system-administrator": {
-                "header": "Quản trị hệ thống",
-                "user-manage": "Quản lý người sử dụng",
-                "product-manage": "Quản lý gói",
-                "register-package-group-or-account": "Đăng ký gói dịch vụ cho nhóm/tài khoản"
-            },
+        "admin": {
+            "manage": "Quản lý |",
+            "manage-doctor":"Quản lý bác sĩ |",
+            "manage-user":"Quản lý người dùng",
             "system-parameter": {
                 "header": "Tham số hệ thống"
             }

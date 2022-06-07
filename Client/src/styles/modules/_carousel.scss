@@ -3,7 +3,7 @@
         width: 250px;
         height: 285px;
         padding: 1rem;
-        background-color: #199bb8 !important;
+        background: rgb(79, 114, 220);
         border-radius: 0.8rem;
         transition: background 320ms;
 
@@ -18,7 +18,7 @@
         width: 250px;
         height: 285px;
         padding: 1rem;
-        background-color: #c6d6d8 !important;
+        background-color: #fff !important;
         border-radius: 0.8rem;
         transition: background 320ms;
 
@@ -120,14 +120,14 @@
     border-radius: 50%;
     font-size: 1.8rem;
     box-shadow: 0 8px 8px rgba(0, 0, 0, 0.3);
-
+   cursor: pointer;
     i {
         color: #fff;
     }
 }
 
 .doc-name {
-    color: #fff;
+    color: #333;
     font-size: 15px;
     text-align: center;
 }

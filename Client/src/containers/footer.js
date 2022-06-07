@@ -25,6 +25,8 @@ const Footer = () => {
           </a>
           by <a href="https://github.com/Vfunnyguy">Nguyễn Hoàng Việt </a>
         </span>
+    
+
       </div>
 
       {isBottom && (

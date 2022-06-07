@@ -10,13 +10,13 @@ class MenuGroup extends Component {
     render() {
         const { name, children } = this.props;
         return (
-            <div className="navbar-item has-dropdown is-hoverable has-text-white">
+            <div className="navbar-item has-text-white">
                 <div className="menu-group-name ">
                     <FormattedMessage id={name} />
                 </div>
-                <ul className="navbar-dropdown has-text-black center ">
+                <div className="has-text-black center d-flex ">
                     {children}
-                </ul>
+                </div>
             </div>
         );
     }
@@ -27,12 +27,12 @@ class Menu extends Component {
     render() {
         const { name, active, link, children, onClick, hasSubMenu, onLinkClick } = this.props;
         return (
-            <li className={"menu" + (hasSubMenu ? " has-sub-menu" : "") + ("") + (active ? " active" : "")}>
+            <div className={"menu has-text-black" + (hasSubMenu ? " has-sub-menu" : "") + ("") + (active ? " active" : "")}>
                 {hasSubMenu ? (
                     <Fragment>
                         <span
                             data-toggle="collapse"
-                            className={"menu-link collapsed is-hidden"}
+                            className={" ml-2 has-text-white collapsed is-hidden"}
                             onClick={onClick}
                             aria-expanded={"false"}
                         >
@@ -42,17 +42,17 @@ class Menu extends Component {
                             </div>
                         </span>
                         <div>
-                            <ul className="menu-link">
+                            <ul className=" ml-2 has-text-white">
                                 {children}
                             </ul>
                         </div>
                     </Fragment>
                 ) : (
-                        <Link to={link} className="menu-link" onClick={onLinkClick}>
+                        <Link to={link} className="ml-2 has-text-white" onClick={onLinkClick}>
                             <FormattedMessage id={name} />
                         </Link>
                     )}
-            </li>
+            </div>
         );
     }
 }
@@ -67,7 +67,7 @@ class SubMenu extends Component {
         const { name, link, onLinkClick } = this.props;
         return (
             <li className={"navbar-item " + this.getItemClass(link)}>
-                <Link to={link} className="sub-menu-link" onClick={onLinkClick}>
+                <Link to={link} className="sub-has-text-white" onClick={onLinkClick}>
                     <FormattedMessage id={name} />
                 </Link>
             </li>

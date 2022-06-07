@@ -19,6 +19,8 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import Fade from '@mui/material/Fade';
 import Backdrop from '@mui/material/Backdrop';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 export {
   TextField,
   Tabs,
@@ -41,4 +43,6 @@ export {
   AdbIcon,
   Fade,
   Backdrop,
+  Visibility,
+  VisibilityOff
 };
