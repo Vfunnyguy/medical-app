@@ -4,6 +4,7 @@ import Typography from '@mui/material/Typography';
 import { auth_img } from '@/utils';
 import Login from '../components/auth/Login';
 import SideBar from '../components/menu/sideBar';
+import Admin from '../components/system/admin';
 // import { getAllUserApi } from '../redux/action/authAction';
 const Home = () => {
 
@@ -19,11 +20,7 @@ const Home = () => {
   return (
     <div className="home-page">
 
-    <SideBar/>
-       <Typography align='center'variant='h1'>
-       HELLO
-       </Typography>
-
+     <Admin/>
       
          
   

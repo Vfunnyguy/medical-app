@@ -9,30 +9,26 @@ import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import { InputAdornment, FormControl,InputLabel,IconButton } from '@mui/material';
+import { InputAdornment, FormControl, InputLabel, IconButton } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
-import { Visibility,VisibilityOff } from '@/mui-import ';
+import { Visibility, VisibilityOff } from '@/mui-import ';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-
 const theme = createTheme();
 
 export default function Login() {
-//   const initState = { email: '', password: '' };
-//   const [userLogin, setUserLogin] = useState(initState);
-//   const { email, password } = userLogin;
-  const [showPass,setShowPass]=React.useState(false)
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   const data = new FormData(event.currentTarget);
-  //   console.log({
-  //     email: data.get('email'),
-  //     password: data.get('password'),
-  //   });
-  // };
-  const handleShowpass=()=>{
-    setShowPass(!showPass)
-  }
+  const [showPass, setShowPass] = React.useState(false);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    console.log({
+      email: data.get('email'),
+      password: data.get('password'),
+    });
+  };
+  const handleShowpass = () => {
+    setShowPass(!showPass);
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -44,7 +40,7 @@ export default function Login() {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: 'url(https://source.unsplash.com/random)',
+            backgroundImage: 'url(https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80)',
             backgroundRepeat: 'no-repeat',
             backgroundColor: (t) =>
               t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
@@ -68,7 +64,7 @@ export default function Login() {
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
-            <Box component="form" noValidate sx={{ mt: 1 }}>
+            <Box component="form" noValidate sx={{ mt: 1 }} onSubmit={handleSubmit}>
               <TextField
                 margin="normal"
                 required
@@ -81,18 +77,28 @@ export default function Login() {
                 // value={email}
               />
 
-            
               <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="password"
                 label="Password"
-                type="password"
-                id="password"
+                fullWidth
+                required
+                margin="normal"
                 autoComplete="current-password"
-                // value={password}
+                id='password'
+                name='password'
+                type={showPass ? 'text' : 'password'}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment>
+                      <IconButton
+                      onClick={handleShowpass}
+                      >
+                        {showPass?<Visibility />:<VisibilityOff />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
               />
+           
               <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
                 Sign In
               </Button>

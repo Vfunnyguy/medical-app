@@ -1,5 +1,6 @@
 import TextField from '@mui/material/TextField';
 import Tabs from '@mui/material/Tabs';
+import Paper from '@mui/material/Paper';
 import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
@@ -21,6 +22,10 @@ import Fade from '@mui/material/Fade';
 import Backdrop from '@mui/material/Backdrop';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import Grid from '@mui/material/Grid';
+import CssBaseline from '@mui/material/CssBaseline';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+
 export {
   TextField,
   Tabs,
@@ -44,5 +49,9 @@ export {
   Fade,
   Backdrop,
   Visibility,
-  VisibilityOff
+  VisibilityOff,
+  Grid,
+  CssBaseline,
+  Paper,
+  LockOutlinedIcon,
 };
