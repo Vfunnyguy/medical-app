@@ -7,23 +7,27 @@ import SideBar from '../components/menu/sideBar';
 import Admin from '../components/system/admin';
 // import { getAllUserApi } from '../redux/action/authAction';
 const Home = () => {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    fetch('http://localhost:3920/api/get-allUser?id=ALL')
+      .then((res) => res.json())
+      .then(data => {
+        setData(data.userData);
+      });
+  }, []);
 
-//  useEffect(()=>{
-   
-//    fetch('http://localhost:3920/api/get-allUser?id=ALL').then(res=>res.json()).then(res=>{
-//      console.log(res);
-//    })
-//  },[])
-
-
-  
   return (
     <div className="home-page">
-
-     <Admin/>
-      
+      {/* <Admin /> */}
+      {
+       data&& data.map(item=>
          
-  
+          <li key={item.id}>
+          {item.fullName}
+          </li>
+        
+        )
+      }
     </div>
   );
 };

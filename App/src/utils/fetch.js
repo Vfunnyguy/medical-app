@@ -1,4 +1,8 @@
 import axios from 'axios'
+// export const instance=axios.create({
+//   baseURL: 'http://localhost:3920',
+//   withCredentials:true
+// })
 export async function postAPI(url,post,token){
  const res=await axios.post(`/api/${url}`,post,{
     headers:{

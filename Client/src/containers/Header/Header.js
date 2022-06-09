@@ -12,20 +12,20 @@ class Header extends Component {
         const { processLogout,userInfo } = this.props;
     console.log('userInfo',userInfo);
         return (
-            <nav className="navbar fs-18 is-info">
+            <aside className="menu  fs-18 is-fullheight p3">
                 {/* thanh navigator */}
-                <div className="navbar-item ">
+                <ul className="menu-list">
                     <Navigator menus={adminMenu} />
-                </div>
+                </ul>
 
                 {/* nút logout */}
-                <div className="navbar-end  mt-3 mr-2" >
-                <span className='mr-2'>
+                <div className=" mt-3 mr-2 bg-active is-rounded" >
+                <span className='mr-2 menu-item '>
                 hello {userInfo&&userInfo.fullName?userInfo.fullName:''}
                 </span>
                     <i className="fas fa-sign-out-alt"style={{fontSize:'18px'}}onClick={processLogout}></i>
                 </div>
-            </nav>
+            </aside>
         );
     }
 

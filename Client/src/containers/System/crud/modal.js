@@ -13,6 +13,7 @@ const style = {
   border: '2px solid #000',
   boxShadow: 24,
   p: 4,
+  borderRadius:'.3rem'
 };
 
 export default function ModalBtn() {
@@ -34,9 +35,8 @@ export default function ModalBtn() {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
+        <Box sx={style} >
         <p className='fw-bold is-4'> Create New User</p>
-         {/* <CrudForm/> */}
          <ModalNew/>
         </Box>
       </Modal>

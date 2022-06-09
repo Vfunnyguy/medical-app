@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
-import { createUserApi } from '../../../services/userService';
+import React, { useState, useEffect, useCallback } from 'react';
+import { createUserApi, getCodeApi } from '../../../services/userService';
 const ModalNew = () => {
   const initState = {
     Fname: '',
     email: '',
     phone: '',
     password: '',
-    // male:1,
-    // female:0
+    gender: [],
   };
   const [createUser, setCreateUser] = useState(initState);
   //   const dispatch = useDispatch();
@@ -43,8 +42,9 @@ const ModalNew = () => {
         console.log(error);
       }
     }
-    console.log(createUser);
   }
+
+  
 
   return (
     <div className="crud-modal">
@@ -102,6 +102,17 @@ const ModalNew = () => {
               </span>
             </div>
           </div>
+          <div className="field">
+            <label className="label">Chức vụ</label>
+            <div className="control">
+              <div className="select">
+                <select>
+                  <option>Admin</option>
+                  <option>Doctor</option>
+                </select>
+              </div>
+            </div>
+          </div>
         </div>
         <div className="column">
           <div className="field">
@@ -140,19 +151,30 @@ const ModalNew = () => {
               </span>
             </div>
           </div>
-          {/* <div className="field">
-                <label className="label">Gender</label>
-                <div className="control">
-                  <label className="radio">
-                    <input type="radio" name="gender" value={createUser.male} />
-                    Male
-                  </label>
-                  <label className="radio">
-                    <input type="radio" name="gender" value={createUser.female} />
-                    Female
-                  </label>
-                </div>
-              </div> */}
+          <div className="field">
+            <label className="label">Giới tính</label>
+            <div className="control">
+              <div className="select">
+                <select>
+                  <option>Admin</option>
+                  <option>Doctor</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div className="field">
+            <span className="label">Avatar</span>
+
+            <label className="file-label">
+              <input className="file-input" type="file" name="avatar" />
+              <span className="file-cta">
+                <span className="file-icon">
+                  <i className="fas fa-upload"></i>
+                </span>
+                <span className="file-label">Choose a file…</span>
+              </span>
+            </label>
+          </div>
         </div>
       </div>
       <div className="field is-centered center">

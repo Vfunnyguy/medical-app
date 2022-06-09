@@ -3,9 +3,6 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -14,22 +11,35 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { Visibility, VisibilityOff } from '@/mui-import ';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import axios from 'axios';
 const theme = createTheme();
 
 export default function Login() {
-  const [showPass, setShowPass] = React.useState(false);
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+  const initState = {
+    email: '',
+    password: '',
+    errMessage: '',
   };
+  const [user, setUser] = React.useState(initState);
+  const { email, password } = user;
+  const [showPass, setShowPass] = React.useState(false);
+  function handleInputChange(e) {
+    const { name, value } = e.target;
+    setUser({ ...user, [name]: value });
+  }
   const handleShowpass = () => {
     setShowPass(!showPass);
   };
-
+  const handleLogin = async () => {
+    try {
+      let data = await axios.post('http://localhost:3920/api/login', email, password);
+      if (data && data.errCode !== 0) {
+        setUser({ errMessage: data.message });
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
   return (
     <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: '100vh' }}>
@@ -40,7 +50,8 @@ export default function Login() {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: 'url(https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80)',
+            backgroundImage:
+              'url(https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80)',
             backgroundRepeat: 'no-repeat',
             backgroundColor: (t) =>
               t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
@@ -64,7 +75,7 @@ export default function Login() {
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
-            <Box component="form" noValidate sx={{ mt: 1 }} onSubmit={handleSubmit}>
+            <Box component="form" noValidate sx={{ mt: 1 }}>
               <TextField
                 margin="normal"
                 required
@@ -74,7 +85,8 @@ export default function Login() {
                 name="email"
                 autoComplete="email"
                 autoFocus
-                // value={email}
+                value={email}
+                onChange={handleInputChange}
               />
 
               <TextField
@@ -83,23 +95,29 @@ export default function Login() {
                 required
                 margin="normal"
                 autoComplete="current-password"
-                id='password'
-                name='password'
+                id="password"
+                name="password"
                 type={showPass ? 'text' : 'password'}
+                value={password}
+                onChange={handleInputChange}
                 InputProps={{
                   endAdornment: (
                     <InputAdornment>
-                      <IconButton
-                      onClick={handleShowpass}
-                      >
-                        {showPass?<Visibility />:<VisibilityOff />}
+                      <IconButton onClick={handleShowpass}>
+                        {showPass ? <Visibility /> : <VisibilityOff />}
                       </IconButton>
                     </InputAdornment>
                   ),
                 }}
               />
-           
-              <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+                onClick={ handleLogin}
+              >
                 Sign In
               </Button>
             </Box>

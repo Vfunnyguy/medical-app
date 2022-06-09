@@ -12,5 +12,7 @@ const createUserApi = (data) => {
 const deleteUserApi = (userId) => {
   return axios.delete(`/api/deleteUser`,{data:{id:userId}});
 };
-
-export { handleLoginApi, getAllUserApi, createUserApi, deleteUserApi };
+const getCodeApi=(type)=>{
+  return axios.get(`/api/code?type=${type}`);
+}
+export { handleLoginApi, getAllUserApi, createUserApi, deleteUserApi ,getCodeApi};

@@ -27,12 +27,13 @@
     },
     "menu": {
         "admin": {
-            "manage": "Quản lý |",
-            "manage-doctor":"Quản lý bác sĩ |",
+            "manage": "Hệ thống ",
+            "manage-doctor":"Quản lý bác sĩ ",
             "manage-user":"Quản lý người dùng",
-            "system-parameter": {
-                "header": "Tham số hệ thống"
-            }
+            "crud":"Quản lý thông tin ",
+            "spectality":"Chuyên khoa",
+            "manage-clinic":"Phòng khám"
+           
         }
     },
     "system": {

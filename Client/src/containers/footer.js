@@ -23,10 +23,8 @@ const Footer = () => {
               height="24"
             />
           </a>
-          by <a href="https://github.com/Vfunnyguy">Nguyễn Hoàng Việt </a>
         </span>
-    
-
+          by <a href="https://github.com/Vfunnyguy">Nguyễn Hoàng Việt </a>
       </div>
 
       {isBottom && (
