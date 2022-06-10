@@ -1,0 +1,10 @@
+{
+  "name": "chatbot",
+  "version": "1.0.0",
+  "description": "chatbot package",
+  "main": "index.js",
+  "author": "Nguyễn Hoàng Việt <https://github.com/Vfunnyguy> ",
+  "repository": "https://github.com/Vfunnyguy/medical-app.git",
+  "license": "ISC",
+  "private": true
+}

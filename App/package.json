@@ -3,6 +3,7 @@
   "proxy": "http://localhost:3920",
   "private": false,
   "version": "0.0.0",
+  "author": "Nguyễn Hoàng Việt <https://github.com/Vfunnyguy>",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
