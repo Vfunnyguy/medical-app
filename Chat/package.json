@@ -6,5 +6,20 @@
   "author": "Nguyễn Hoàng Việt <https://github.com/Vfunnyguy> ",
   "repository": "https://github.com/Vfunnyguy/medical-app.git",
   "license": "ISC",
-  "private": true
+  "private": true,
+  "scripts": {
+    "start": "nodemon --exec babel-node index.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "dotenv": "^16.0.1",
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "nodemon": "^2.0.16"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.18.2",
+    "@babel/node": "^7.17.10",
+    "@babel/preset-env": "^7.18.2"
+  }
 }
