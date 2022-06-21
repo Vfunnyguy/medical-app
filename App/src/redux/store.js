@@ -1,13 +1,10 @@
-import { configureStore,applyMiddleware } from "redux";
-import thunk from "redux-thunk";
+import { configureStore } from "@reduxjs/toolkit";
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
-import rootReducer from './reducer/index';
-import { composeWithDevTools } from "redux-devtools-extension";
-// import { authReducer } from "./reducer/authReducer";
-import authReducer from '././slice/authSlice'
-export default configureStore({
+import authSlice from "./slice/authSlice";
+import authReducer from './slice/authSlice'
+export const store= configureStore({
     reducer:{
-        auth:authReducer
+        auth:authReducer,
     }
 })

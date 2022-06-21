@@ -7,10 +7,14 @@ export const authSlice=createSlice({
     },
     reducers:{
       login:(state,action)=>{
-        state.email=action.payload.email;
-        state.password=action.payload.password;
+        state.email=action.payload;
+        state.password=action.payload;
+      },
+      logout:(state,action)=>{
+        state=action.payload;
       }
+
     }
 })
-export const{login}=authSlice.actions;
+export const{login,logout}=authSlice.actions;
 export default authSlice.reducer;

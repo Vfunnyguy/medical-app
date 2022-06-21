@@ -15,7 +15,9 @@ const renderApp = () => {
     ReactDOM.render(
         <Provider store={reduxStore}>
             <IntlProviderWrapper>
+            <React.StrictMode>
                 <App persistor={persistor}/>
+            </React.StrictMode>
             </IntlProviderWrapper>
         </Provider>,
         document.getElementById('root')

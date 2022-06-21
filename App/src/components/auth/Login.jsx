@@ -12,6 +12,8 @@ import Typography from '@mui/material/Typography';
 import { Visibility, VisibilityOff } from '@/mui-import ';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
+// import {useDispatch, useSelector} from 'react-redux';
+// import {login,logout}from '../../redux/slice/authSlice'
 const theme = createTheme();
 
 export default function Login() {
@@ -20,6 +22,9 @@ export default function Login() {
     password: '',
     errMessage: '',
   };
+  // const dispath=useDispatch()
+  // const auth=useSelector((state)=>state.auth.initState)
+
   const [user, setUser] = React.useState(initState);
   const { email, password } = user;
   const [showPass, setShowPass] = React.useState(false);
@@ -116,7 +121,7 @@ export default function Login() {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
-                onClick={ handleLogin}
+                // onClick={ dispath(login(email,password))}
               >
                 Sign In
               </Button>
