@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router';
 
-// import appReducer from "./appReducer";
+import appReducer from "./appReducer";
 import adminReducer from "./adminReducer";
 import userReducer from "./userReducer";
 
@@ -23,9 +23,8 @@ const userPersistConfig = {
 };
 
 
-// eslint-disable-next-line import/no-anonymous-default-export
 export default (history) => combineReducers({
     router: connectRouter(history),
     user: persistReducer(userPersistConfig, userReducer),
-    admin: adminReducer,
+    app: appReducer
 })

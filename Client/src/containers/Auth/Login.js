@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
-// import * as actions from "../store/actions";
 import * as actions from '../../store/actions';
 import { wel_img } from '../../utils/img';
-
-// import { userService } from '../../services/userService';
 import { handleLoginApi } from '../../services/userService';
 
 class Login extends Component {

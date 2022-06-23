@@ -10,7 +10,7 @@ const MetVideo = () => {
                <div class="btn-wrap"><button class="play-btn"><i class="fas fa-video    "></i></button></div>
             </div>
             <div class="descrip">
-                <p className="doc-name is-capitalized">Tư vấn tâm lý ,trị liệu từ xa</p>
+                <p className="doc-name is-capitalized text-white">Tư vấn tâm lý ,trị liệu từ xa</p>
             </div>
           </div>
       </div>
@@ -21,7 +21,7 @@ const MetVideo = () => {
                <div class="btn-wrap"><button class="play-btn"><i class="fas fa-video    "></i></button></div>
             </div>
             <div class="descrip">
-                <p className="doc-name is-capitalized">Tư vấn tâm lý ,trị liệu từ xa</p>
+                <p className="doc-name is-capitalized text-white">Tư vấn tâm lý ,trị liệu từ xa</p>
             </div>
           </div>
       </div>
@@ -32,7 +32,7 @@ const MetVideo = () => {
                <div class="btn-wrap"><button class="play-btn"><i class="fas fa-video    "></i></button></div>
             </div>
             <div class="descrip">
-                <p className="doc-name is-capitalized">Tư vấn tâm lý ,trị liệu từ xa</p>
+                <p className="doc-name is-capitalized text-white">Tư vấn tâm lý ,trị liệu từ xa</p>
             </div>
           </div>
       </div>
@@ -43,7 +43,7 @@ const MetVideo = () => {
                <div class="btn-wrap"><button class="play-btn"><i class="fas fa-video    "></i></button></div>
             </div>
             <div class="descrip">
-                <p className="doc-name is-capitalized">Tư vấn tâm lý ,trị liệu từ xa</p>
+                <p className="doc-name is-capitalized text-white">Tư vấn tâm lý ,trị liệu từ xa</p>
             </div>
           </div>
       </div>
@@ -54,7 +54,7 @@ const MetVideo = () => {
                <div class="btn-wrap"><button class="play-btn"><i class="fas fa-video    "></i></button></div>
             </div>
             <div class="descrip">
-                <p className="doc-name is-capitalized">Tư vấn tâm lý ,trị liệu từ xa</p>
+                <p className="doc-name is-capitalized text-white">Tư vấn tâm lý ,trị liệu từ xa</p>
             </div>
           </div>
       </div>

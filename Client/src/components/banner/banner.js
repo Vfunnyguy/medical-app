@@ -5,7 +5,7 @@ const Banner = () => {
   const banner_img='https://bookingcare.vn/assets/anh/bookingcare-cover-4.jpg'
   
   return (
-    <div className="banner hero is-halfheight is-small">
+    <div className="banner px-35 is-halfheight is-small">
     <section className='banner-img' >
      <img alt='banner'src={banner_img}/>
     </section>
