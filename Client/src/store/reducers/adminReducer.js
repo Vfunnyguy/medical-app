@@ -1,33 +1,55 @@
 import actionTypes from '../actions/actionTypes';
 
 const initialState = {
-    isLoggedIn: false,
-    adminInfo: null
-}
+  isLoadGender: false,
+  genders: [],
+  roles: [],
+  positions: [],
+};
 
-const appReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case actionTypes.ADMIN_LOGIN_SUCCESS:
-            return {
-                ...state,
-                isLoggedIn: true,
-                adminInfo: action.adminInfo
-            }
-        case actionTypes.ADMIN_LOGIN_FAIL:
-            return {
-                ...state,
-                isLoggedIn: false,
-                adminInfo: null
-            }
-        case actionTypes.PROCESS_LOGOUT:
-            return {
-                ...state,
-                isLoggedIn: false,
-                adminInfo: null
-            }
-        default:
-            return state;
-    }
-}
+const adminReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case actionTypes.GENDER_START:
+      var cpState = { ...state };
+      cpState.isLoadGender = true;
+      return {
+        ...cpState,
+      };
+    case actionTypes.GENDER_SUCCESS:
+      state.genders = action.data;
+      state.isLoadGender = false;
+      return {
+        ...state,
+      };
+    case actionTypes.GENDER_END:
+      state.isLoadGender = false;
+      state.genders = [];
+      return {
+        ...state,
+      };
+    case actionTypes.POSITION_SUCCESS:
+      state.positions = action.data;
+      return {
+        ...state,
+      };
+    case actionTypes.POSITION_END:
+      state.positions = [];
+      return {
+        ...state,
+      };
+    case actionTypes.ROLE_SUCCESS:
+      state.roles = action.data;
+      return {
+        ...state,
+      };
+    case actionTypes.ROLE_END:
+      state.roles = [];
+      return {
+        ...state,
+      };
+    default:
+      return state;
+  }
+};
 
-export default appReducer;
+export default adminReducer;

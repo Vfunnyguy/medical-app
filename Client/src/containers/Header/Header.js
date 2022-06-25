@@ -10,7 +10,6 @@ class Header extends Component {
 
     render() {
         const { processLogout,userInfo } = this.props;
-    console.log('userInfo',userInfo);
         return (
             <aside className="menu  fs-18 is-fullheight p3">
                 {/* thanh navigator */}

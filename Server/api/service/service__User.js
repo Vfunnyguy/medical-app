@@ -78,9 +78,10 @@ export const createUser = async (user) => {
           password: await bcrypt.hash(user.password, 10),
           fullName: user.Fname,
           address: user.address,
-          // gender: user.gender === '1' ? true : false,
           phoneNumber: user.phone,
+          gender: user.gender,
           roleID: user.role,
+          positionID:user.position
         });
         resolve({ errCode: 0, errMessage: 'create success' });
       }

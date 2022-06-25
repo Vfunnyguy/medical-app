@@ -2,7 +2,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getAllUserApi,deleteUserApi } from '../../services/userService';
-import Modal from './crud/modal';
+
+
 
 class UserManage extends Component {
   constructor(props) {
@@ -88,10 +89,10 @@ class UserManage extends Component {
             </div>
           </div>
           <div className="column">
-           <Modal/>
+          
           </div>
         </div>
-      {/* <CrudForm/> */}
+  
       </div>
     );
   }

@@ -28,9 +28,9 @@
     "menu": {
         "admin": {
             "manage": "Hệ thống ",
-            "manage-doctor":"Quản lý bác sĩ ",
+            "manage-doctor":"Thêm người dùng ",
             "manage-user":"Quản lý người dùng",
-            "crud":"Quản lý thông tin ",
+            "crud":"Quản lý người dùng",
             "spectality":"Chuyên khoa",
             "manage-clinic":"Phòng khám"
            
