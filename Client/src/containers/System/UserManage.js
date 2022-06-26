@@ -56,6 +56,9 @@ class UserManage extends Component {
                     <th>Email</th>
                     <th>Address</th>
                     <th>Phone No.</th>
+                    <th>RoleID</th>
+                    <th>Gender</th>
+                    
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -69,6 +72,8 @@ class UserManage extends Component {
                           <td>{item.email}</td>
                           <td>{item.address}</td>
                           <td>{item.phoneNumber}</td>
+                          <td>{item.value_vi}</td>
+                          <td>{item.gender}</td>
                           <td>
                             <button className="button is-primary mr-2 has-text-white ">
                               <span className="icon is-small">

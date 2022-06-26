@@ -1,6 +1,11 @@
 import actionTypes from './actionTypes';
-import { getCodeApi, createUserApi } from '../../services/userService';
-import { identity } from 'lodash';
+import {
+  getCodeApi,
+  createUserApi,
+  getAllUserApi,
+  deleteUserApi,
+} from '../../services/userService';
+import { toast } from 'react-toastify';
 
 export const genderStart = () => {
   return async (dispatch, getState) => {
@@ -77,9 +82,10 @@ export const createNewUser = (data) => {
   return async (dispatch, getState) => {
     try {
       let res = await createUserApi(data);
-      console.log(res);
       if (res && res.errCode === 0) {
+        toast.success('Tạo thành công');
         dispatch(createUserSuccess());
+        dispatch(getUserStart());
       } else {
         dispatch(createUserFail());
       }
@@ -91,8 +97,60 @@ export const createNewUser = (data) => {
 };
 export const createUserSuccess = () => ({
   type: actionTypes.CREATE_USER_SUCCESS,
-//   data: data,data
+  //   data: data,data
 });
 export const createUserFail = () => ({
   type: actionTypes.CREATE_USER_FAIL,
+});
+export const getUserStart = () => {
+  return async (dispatch, getState) => {
+    try {
+      let res = await getAllUserApi('ALL');
+      console.log(res);
+      if (res && res.errCode === 0) {
+        dispatch(getUserSuccess(res.userData.reverse()));
+      } else {
+        toast.error('Không thể lấy dữ liệu');
+        dispatch(getUserEnd());
+      }
+    } catch (error) {
+      toast.error('Không thể lấy dữ liệu');
+
+      dispatch(getUserEnd());
+      console.log(error);
+    }
+  };
+};
+export const getUserSuccess = (data) => ({
+  type: actionTypes.GET_USER_SUCCESS,
+  users: data,
+});
+export const getUserEnd = () => ({
+  type: actionTypes.GET_USER_END,
+});
+export const deleteUserStart = (id) => {
+  return async (dispatch, getState) => {
+    try {
+      let res = await deleteUserApi(id);
+      console.log(res);
+      if (res && res.errCode === 0) {
+        toast.success('Xóa thành công');
+        dispatch(deleteUserSuccess());
+        dispatch(getUserStart());
+      } else {
+        toast.error('Không thể xóa');
+        dispatch(deleteUserEnd());
+      }
+    } catch (error) {
+      toast.error('Không thể xóa');
+      dispatch(deleteUserEnd());
+      console.log(error);
+    }
+  };
+};
+export const deleteUserSuccess = () => ({
+  type: actionTypes.DEL_SUCCESS,
+});
+export const deleteUserEnd = () => ({
+  type: actionTypes.DEL_END,
 });

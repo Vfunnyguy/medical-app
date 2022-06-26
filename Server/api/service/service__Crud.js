@@ -6,7 +6,7 @@ export const createdNewUser = async (data) => {
       await db.User.create({
         email: data.email,
         password: await bcrypt.hash(data.password, 10),
-        fullName: data.Fname,
+        fullName: data.fullName,
         address: data.address,
         gender: data.gender === '1' ? true : false,
         phoneNumber: data.phone,
@@ -54,7 +54,7 @@ export var updateUserData = async (data) => {
         where: { id: data.id },
       });
       if (user) {
-        user.fullName = data.Fname;
+        user.fullName = data.fullName;
         user.phoneNumber = data.phone;
         user.email = data.email;
         user.address = data.address;

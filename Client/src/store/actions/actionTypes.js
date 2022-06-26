@@ -17,6 +17,10 @@ const actionTypes = Object.freeze({
     ROLE_END:'ROLE_END',
     CREATE_USER_SUCCESS:'CREATE_USER_SUCCESS',
     CREATE_USER_FAIL:'CREATE_USER_FAIL',
+    DEL_SUCCESS:'DEL_SUCCESS',
+    DEL_END:'DEL_END',
+    GET_USER_SUCCESS:'GET_USER_SUCCESS',
+    GET_USER_END:'GET_USER_END',
 })
 
 export default actionTypes;

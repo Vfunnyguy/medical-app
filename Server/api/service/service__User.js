@@ -76,12 +76,12 @@ export const createUser = async (user) => {
         await db.User.create({
           email: user.email,
           password: await bcrypt.hash(user.password, 10),
-          fullName: user.Fname,
+          fullName: user.fullName,
           address: user.address,
           phoneNumber: user.phone,
           gender: user.gender,
-          roleID: user.role,
-          positionID:user.position
+          roleID: user.roleID,
+          positionID:user.positionID
         });
         resolve({ errCode: 0, errMessage: 'create success' });
       }
@@ -112,24 +112,23 @@ export const deleteUser = (userID) => {
 export async function editUser(data) {
   return new Promise(async (resolve, reject) => {
     try {
-      if (!data.id) {
+      if (!data.id||!data.roleID||!data.positionID||!data.gender) {
         resolve({ errCode: 2, errMessage: 'missing id' });
       }
       let user = await db.User.findOne({
         where: { id: data.id },
       });
       if (user) {
-        user.fullName = data.Fname;
+        user.fullName = data.fullName;
         user.phoneNumber = data.phone;
         user.email = data.email;
         user.address = data.address;
+        user.roleID = data.roleID;
+        user.positionID = data.positionID;
+        user.gender=data.gender;
+       
         await user.save();
-        // await db.User.save({
-        //   fullName:data.Fname,
-        //   phoneNumber:data.phone,
-        //   email:data.email,
-        //   address:data.address,
-        // })
+        
 
         resolve({
           errCode: 0,

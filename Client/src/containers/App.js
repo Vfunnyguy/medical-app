@@ -16,7 +16,7 @@ import Login from './Auth/Login';
 import System from '../routes/System';
 import HomePage from '../pages/home';
 
-import { CustomToastCloseButton } from '../components/CustomToast';
+
 import ConfirmModal from '../components/ConfirmModal';
 import Footer from './footer';
 
@@ -57,11 +57,22 @@ class App extends Component {
                             <Footer/>
                         </main>
 
-                        <ToastContainer
+                        {/* <ToastContainer
                             className="toast-container" toastClassName="toast-item" bodyClassName="toast-item-body"
                             autoClose={false} hideProgressBar={true} pauseOnHover={false}
                             pauseOnFocusLoss={true} closeOnClick={false} draggable={false}
                             closeButton={<CustomToastCloseButton />}
+                        /> */}
+                        <ToastContainer
+                        position='bottom-right'
+                        autoClose={2000}
+                        hideProgressBar={false}
+                        newestOnTop={false}
+                        closeOnClick={false}
+                        rtl={false}
+                        pauseOnFocusLoss
+                        draggable
+                        pauseOnHover
                         />
                     </div>
                 </Router>

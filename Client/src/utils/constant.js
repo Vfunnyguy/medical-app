@@ -25,3 +25,6 @@ export const YesNoObj = {
     YES: 'Y',
     NO: 'N'
 }
+export const crud_action={
+
+}
