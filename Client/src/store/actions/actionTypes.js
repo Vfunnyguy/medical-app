@@ -21,6 +21,8 @@ const actionTypes = Object.freeze({
     DEL_END:'DEL_END',
     GET_USER_SUCCESS:'GET_USER_SUCCESS',
     GET_USER_END:'GET_USER_END',
+    EDIT_SUCCESS:'EDIT_SUCCESS',
+    EDIT_FAIL:'EDIT_FAIL',
 })
 
 export default actionTypes;

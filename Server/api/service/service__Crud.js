@@ -53,6 +53,7 @@ export var updateUserData = async (data) => {
       let user = await db.User.findOne({
         where: { id: data.id },
       });
+      console.log(data);
       if (user) {
         user.fullName = data.fullName;
         user.phoneNumber = data.phone;

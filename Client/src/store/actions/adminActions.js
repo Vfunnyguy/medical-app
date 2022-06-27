@@ -4,6 +4,7 @@ import {
   createUserApi,
   getAllUserApi,
   deleteUserApi,
+  editUserApi,
 } from '../../services/userService';
 import { toast } from 'react-toastify';
 
@@ -82,7 +83,8 @@ export const createNewUser = (data) => {
   return async (dispatch, getState) => {
     try {
       let res = await createUserApi(data);
-      if (res && res.errCode === 0) {
+      console.log(res);
+      if (res.user && res.user.errCode === 0) {
         toast.success('Tạo thành công');
         dispatch(createUserSuccess());
         dispatch(getUserStart());
@@ -106,7 +108,6 @@ export const getUserStart = () => {
   return async (dispatch, getState) => {
     try {
       let res = await getAllUserApi('ALL');
-      console.log(res);
       if (res && res.errCode === 0) {
         dispatch(getUserSuccess(res.userData.reverse()));
       } else {
@@ -132,8 +133,7 @@ export const deleteUserStart = (id) => {
   return async (dispatch, getState) => {
     try {
       let res = await deleteUserApi(id);
-      console.log(res);
-      if (res && res.errCode === 0) {
+      if (res.result && res.result.errCode === 0) {
         toast.success('Xóa thành công');
         dispatch(deleteUserSuccess());
         dispatch(getUserStart());
@@ -149,8 +149,35 @@ export const deleteUserStart = (id) => {
   };
 };
 export const deleteUserSuccess = () => ({
-  type: actionTypes.DEL_SUCCESS,
+  type:' DEL_SUCCESS',
 });
 export const deleteUserEnd = () => ({
-  type: actionTypes.DEL_END,
+  type: 'DEL_END',
 });
+export const editUser=(data)=>{
+  return async(dispatch,getState)=>{
+    try{
+      let res=await editUserApi(data);
+      console.log(res.message);
+      if(res.message&&res.message.errCode===0){
+        toast.success('Sửa thành công');
+        dispatch(editUserSuccess());
+        dispatch(getUserStart());
+      }else{
+        toast.error('Không thể sửa');
+        dispatch(editUserEnd());
+      }
+    }catch(error){
+      toast.error('Không thể sửa');
+      dispatch(editUserEnd());
+      console.log(error);
+    }
+  }
+}
+export const editUserSuccess=()=>({
+  type:actionTypes.EDIT_SUCCESS,
+
+})
+export const editUserEnd=()=>({
+  type:actionTypes.EDIT_FAIL
+})

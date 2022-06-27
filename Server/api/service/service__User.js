@@ -81,7 +81,9 @@ export const createUser = async (user) => {
           phoneNumber: user.phone,
           gender: user.gender,
           roleID: user.roleID,
-          positionID:user.positionID
+          positionID:user.positionID,
+          image:user.avatar
+
         });
         resolve({ errCode: 0, errMessage: 'create success' });
       }
@@ -109,12 +111,13 @@ export const deleteUser = (userID) => {
     }
   });
 };
-export async function editUser(data) {
+export const editUser=  (data) =>{
   return new Promise(async (resolve, reject) => {
     try {
       if (!data.id||!data.roleID||!data.positionID||!data.gender) {
         resolve({ errCode: 2, errMessage: 'missing id' });
       }
+      console.log(data);
       let user = await db.User.findOne({
         where: { id: data.id },
       });
@@ -126,7 +129,9 @@ export async function editUser(data) {
         user.roleID = data.roleID;
         user.positionID = data.positionID;
         user.gender=data.gender;
-       
+        if(data.avatar){
+          user.image=data.avatar
+        }
         await user.save();
         
 

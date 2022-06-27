@@ -21,22 +21,24 @@ class UserTable extends Component {
   handleDelete = (user) => {
     this.props.deleteUser(user.id);
   };
-  handleEdit=(user)=>{
-    this.props.handleEdit(user)
-  }
+  handleEditUser=(user)=>{
+    this.props.handleEditUser(user)
+  };
+  
   render() {
     let listUsers = this.state.userRedux;
+    console.log(listUsers);
     return (
       <div className="box">
         <table className="table is-bordered is-fullwidth is-hoverable ml-2">
           <thead>
-            <tr style={{ background: '#00d1b2', color: '#fff' }}>
-              <th>ID</th>
-              <th>Full Name</th>
-              <th>Email</th>
-              <th>Address</th>
-              <th>Phone </th>
-              <th>Action</th>
+            <tr style={{ background: '#00d1b2' }} className='has-text-centered '>
+              <th className='text-white'>ID</th>
+              <th className='text-white'>Họ&Tên</th>
+              <th className='text-white'>Email</th>
+              <th className='text-white'>Địa chỉ</th>
+              <th className='text-white'>Số điện thoại</th>
+              <th className='text-white'>Hành động</th>
             </tr>
           </thead>
           <tbody>
@@ -49,8 +51,9 @@ class UserTable extends Component {
                     <td>{item.email}</td>
                     <td>{item.address}</td>
                     <td>{item.phoneNumber}</td>
+                   
                     <td>
-                      <button className="button is-primary mr-2 has-text-white " onClick={()=>this.handleEdit(item)}>
+                      <button className="button is-primary mr-2 has-text-white " onClick={()=>this.handleEditUser(item)}>
                         <span className="icon is-small">
                           <i class="fas fa-pen-fancy"></i>
                         </span>

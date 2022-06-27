@@ -26,5 +26,8 @@ export const YesNoObj = {
     NO: 'N'
 }
 export const crud_action={
-
+   create:'create',
+   edit:'edit',
+   delete:'delete',
+   read:'read'
 }
