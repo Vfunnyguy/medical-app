@@ -15,7 +15,10 @@ const deleteUserApi = (userId) => {
 const getCodeApi=(type)=>{
   return axios.get(`/api/code?type=${type}`);
 }
-const editUserApi=(id)=>{
-return axios.put(`/api/editUser`,{data:id});
+const editUserApi=(typeI)=>{
+return axios.put(`/api/editUser`,{data:typeI});
 }
-export { handleLoginApi, getAllUserApi, createUserApi, deleteUserApi ,getCodeApi,editUserApi};
+const getTopDoctorApi=(limit)=>{
+  return axios.get(`/api/get-top-doctor?limit=${limit}`);
+}
+export { handleLoginApi, getAllUserApi, createUserApi, deleteUserApi ,getCodeApi,editUserApi,getTopDoctorApi};

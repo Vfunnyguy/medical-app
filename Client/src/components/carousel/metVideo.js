@@ -7,9 +7,9 @@ const MetVideo = () => {
          <div className="card_video "  >
             <div className="cover" >
                 <img src={doc_img} alt=""/>
-               <div class="btn-wrap"><button class="play-btn"><i class="fas fa-video    "></i></button></div>
+               <div className="btn-wrap"><button className="play-btn"><i className="fas fa-video    "></i></button></div>
             </div>
-            <div class="descrip">
+            <div className="descrip">
                 <p className="doc-name is-capitalized text-white">Tư vấn tâm lý ,trị liệu từ xa</p>
             </div>
           </div>
@@ -18,9 +18,9 @@ const MetVideo = () => {
          <div className="card_video "  >
             <div className="cover" >
                 <img src={doc_img} alt=""/>
-               <div class="btn-wrap"><button class="play-btn"><i class="fas fa-video    "></i></button></div>
+               <div className="btn-wrap"><button className="play-btn"><i className="fas fa-video    "></i></button></div>
             </div>
-            <div class="descrip">
+            <div className="descrip">
                 <p className="doc-name is-capitalized text-white">Tư vấn tâm lý ,trị liệu từ xa</p>
             </div>
           </div>
@@ -29,9 +29,9 @@ const MetVideo = () => {
          <div className="card_video "  >
             <div className="cover" >
                 <img src={doc_img} alt=""/>
-               <div class="btn-wrap"><button class="play-btn"><i class="fas fa-video    "></i></button></div>
+               <div className="btn-wrap"><button className="play-btn"><i className="fas fa-video    "></i></button></div>
             </div>
-            <div class="descrip">
+            <div className="descrip">
                 <p className="doc-name is-capitalized text-white">Tư vấn tâm lý ,trị liệu từ xa</p>
             </div>
           </div>
@@ -40,9 +40,9 @@ const MetVideo = () => {
          <div className="card_video "  >
             <div className="cover" >
                 <img src={doc_img} alt=""/>
-               <div class="btn-wrap"><button class="play-btn"><i class="fas fa-video    "></i></button></div>
+               <div className="btn-wrap"><button className="play-btn"><i className="fas fa-video    "></i></button></div>
             </div>
-            <div class="descrip">
+            <div className="descrip">
                 <p className="doc-name is-capitalized text-white">Tư vấn tâm lý ,trị liệu từ xa</p>
             </div>
           </div>
@@ -51,9 +51,9 @@ const MetVideo = () => {
          <div className="card_video "  >
             <div className="cover" >
                 <img src={doc_img} alt=""/>
-               <div class="btn-wrap"><button class="play-btn"><i class="fas fa-video    "></i></button></div>
+               <div className="btn-wrap"><button className="play-btn"><i className="fas fa-video    "></i></button></div>
             </div>
-            <div class="descrip">
+            <div className="descrip">
                 <p className="doc-name is-capitalized text-white">Tư vấn tâm lý ,trị liệu từ xa</p>
             </div>
           </div>

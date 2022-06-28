@@ -9,7 +9,7 @@ class HeaderHome extends Component {
 
 
             <Link to="/home" className="navbar-item">
-            <i class="fas fa-medkit is-medium fs-18 mr-2 "></i>
+            <i className="fas fa-medkit is-medium fs-18 mr-2 "></i>
             <span className='is-uppercase fs-18'>Medical Booking</span>
             </Link>
           <span
@@ -41,17 +41,11 @@ class HeaderHome extends Component {
               <div className="control has-icons-left">
               <input className="input" type="text" placeholder="Tìm Kiếm" />
                <span className='icon is-small is-left'>
-               <i class="fas fa-search    "></i>
+               <i className="fas fa-search    "></i>
                </span>
               </div>
             </div>
-            {/* <div className="navbar-item has-dropdown is-hoverable">
-              <Link className="navbar-link"><i class="fas fa-globe mt-2   "></i></Link>
-              <div className="navbar-dropdown">
-                <Link className="navbar-item">VN</Link>
-                <Link className="navbar-item">EN</Link>
-              </div>
-            </div> */}
+           
           </div>
         </div>
       </nav>

@@ -5,7 +5,7 @@
   "main": "index.js",
   "repository": "https://github.com/Vfunnyguy/medical-app.git",
   "scripts": {
-    "go": "nodemon --exec babel-node api/index.js",
+    "go": "nodemon --exec babel-node api/index.js"
   },
   "author": "Nguyễn Hoàng Việt <https://github.com/Vfunnyguy>",
   "license": "ISC",

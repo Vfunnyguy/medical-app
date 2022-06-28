@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as action from '../../../store/actions/index';
+import MarkdownIt from 'markdown-it'
+import MdEditor from 'react-markdown-editor-lite';
+import 'react-markdown-editor-lite/lib/index.css';
+const mdParser=new MarkdownIt()
+function handleEditorChange({html,text}){
+  console.log(html,text)
+};
+
 class UserTable extends Component {
   constructor(props) {
     super(props);
@@ -29,11 +37,12 @@ class UserTable extends Component {
     let listUsers = this.state.userRedux;
     console.log(listUsers);
     return (
+      <>
+      
       <div className="box">
         <table className="table is-bordered is-fullwidth is-hoverable ml-2">
           <thead>
             <tr style={{ background: '#00d1b2' }} className='has-text-centered '>
-              <th className='text-white'>ID</th>
               <th className='text-white'>Họ&Tên</th>
               <th className='text-white'>Email</th>
               <th className='text-white'>Địa chỉ</th>
@@ -45,17 +54,17 @@ class UserTable extends Component {
             {listUsers &&listUsers.length>0&&
               listUsers.map((item, index) => {
                 return (
-                  <tr key={index}>
-                    <td>{item.id}</td>
+                  <tr key={index} >
+                    <td hidden>{item.id}</td>
                     <td>{item.fullName}</td>
                     <td>{item.email}</td>
                     <td>{item.address}</td>
                     <td>{item.phoneNumber}</td>
                    
-                    <td>
+                    <td  className='is-centered'>
                       <button className="button is-primary mr-2 has-text-white " onClick={()=>this.handleEditUser(item)}>
                         <span className="icon is-small">
-                          <i class="fas fa-pen-fancy"></i>
+                          <i className="fas fa-pen-fancy"></i>
                         </span>
                       </button>
                       <button className="button is-danger " onClick={() => this.handleDelete(item)}>
@@ -69,7 +78,9 @@ class UserTable extends Component {
               })}
           </tbody>
         </table>
+       <MdEditor style={{ height: '500px',width:'100%' }} renderHTML={text => mdParser.render(text)} onChange={handleEditorChange} />
       </div>
+      </>
     );
   }
 }

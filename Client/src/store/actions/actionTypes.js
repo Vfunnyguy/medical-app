@@ -23,6 +23,8 @@ const actionTypes = Object.freeze({
     GET_USER_END:'GET_USER_END',
     EDIT_SUCCESS:'EDIT_SUCCESS',
     EDIT_FAIL:'EDIT_FAIL',
+    GET_DOC_SUCCESS:'GET_DOC_SUCCESS',
+    GET_DOC_FAIL:'GET_DOC_FAIL',
 })
 
 export default actionTypes;

@@ -107,7 +107,7 @@ class Login extends Component {
                     ></i>
                   </span>
                 </div>
-                 <p class="help is-danger"> {this.state.errMessage}</p>
+                 <p className="help is-danger"> {this.state.errMessage}</p>
               </div>
               <div className="has-text-centered">
                 <button

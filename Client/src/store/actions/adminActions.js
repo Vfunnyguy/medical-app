@@ -5,6 +5,7 @@ import {
   getAllUserApi,
   deleteUserApi,
   editUserApi,
+  getTopDoctorApi,
 } from '../../services/userService';
 import { toast } from 'react-toastify';
 
@@ -181,3 +182,26 @@ export const editUserSuccess=()=>({
 export const editUserEnd=()=>({
   type:actionTypes.EDIT_FAIL
 })
+export const getTopDoctor=()=>{
+  return async(dispatch,getState)=>{
+    try{
+      let res=await getTopDoctorApi('');
+      console.log(res);
+      if(res&&res.errCode===0){
+        dispatch({
+          type:actionTypes.GET_DOC_SUCCESS,
+          data:res.data
+        });
+      }else{
+        dispatch({
+          type:actionTypes.GET_DOC_FAIL,
+        })
+      }
+    }catch(error){
+      console.log(error);
+      dispatch({
+        type:actionTypes.GET_DOC_FAIL
+      })
+    }
+  }
+}

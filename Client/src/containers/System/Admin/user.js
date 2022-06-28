@@ -37,21 +37,21 @@ class UserRedux extends Component {
       var genderValue = this.props.genderNew;
       this.setState({
         genderArr: genderValue,
-        gender: genderValue && genderValue.length > 0 ? genderValue[0].key : '',
+        gender: genderValue && genderValue.length > 0 ? genderValue[0].keyMap : '',
       });
     }
     if (prevProps.roleNew !== this.props.roleNew) {
       let roleValue = this.props.roleNew;
       this.setState({
         roleArr: roleValue,
-        role: roleValue && roleValue.length > 0 ? roleValue[0].key : '',
+        role: roleValue && roleValue.length > 0 ? roleValue[0].keyMap : '',
       });
     }
     if (prevProps.positionNew !== this.props.positionNew) {
       let positionValue = this.props.positionNew;
       this.setState({
         positionArr: positionValue,
-        position: positionValue && positionValue.length > 0 ? positionValue[0].key : '',
+        position: positionValue && positionValue.length > 0 ? positionValue[0].keyMap : '',
       });
     }
     if (prevProps.userList !== this.props.userList) {
@@ -64,9 +64,9 @@ class UserRedux extends Component {
         fullName: '',
         phone: '',
         address: '',
-        gender: genderA && genderA.length > 0 ? genderA[0].key : '',
-        position: roleA && roleA.length > 0 ? roleA[0].key : '',
-        role: positionA && positionA.length > 0 ? positionA[0].key : '',
+        gender: genderA && genderA.length > 0 ? genderA[0].keyMap : '',
+        position: roleA && roleA.length > 0 ? roleA[0].keyMap : '',
+        role: positionA && positionA.length > 0 ? positionA[0].keyMap : '',
         avatar: '',
         action: crud_action.create,
         previewImgUrl:''
@@ -231,7 +231,7 @@ class UserRedux extends Component {
                             roles.length > 0 &&
                             roles.map((item, index) => {
                               return (
-                                <option key={index} value={item.key}>
+                                <option key={index} value={item.keyMap}>
                                   {item.value_vi}
                                 </option>
                               );
@@ -251,7 +251,7 @@ class UserRedux extends Component {
                             genders.length > 0 &&
                             genders.map((item, index) => {
                               return (
-                                <option key={index} value={item.key}>
+                                <option key={index} value={item.keyMap}>
                                   {item.value_vi}
                                 </option>
                               );
@@ -274,7 +274,7 @@ class UserRedux extends Component {
                             positions.length > 0 &&
                             positions.map((item, index) => {
                               return (
-                                <option key={index} value={item.key}>
+                                <option key={index} value={item.keyMap}>
                                   {item.value_vi}
                                 </option>
                               );
