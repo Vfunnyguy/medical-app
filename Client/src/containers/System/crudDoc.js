@@ -52,10 +52,10 @@ class DocInfo extends Component {
   }
   handleSaveContent=()=>{
     this.props.saveInfo({
+        docID:this.state.selectedOption.value,
         htmlContent:this.state.contentH,
         markDownContent:this.state.contentM,
         description:this.state.description,
-        docID:this.state.selectedOption.value
     })
  
   }

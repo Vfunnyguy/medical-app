@@ -63,3 +63,34 @@ export const saveDoctorInfo = (dataInput) => {
     }
   });
 };
+export function getDocById(inputID) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (!inputID) {
+        reject({
+          errCode: -1,
+          errMessage: 'Invalid input',
+        });
+      } else {
+        var docData = await db.User.findOne({
+          where: { id: inputID },
+          attributes: {
+            exclude: ['password', 'image'],
+          },
+          include: [
+            { model: db.MarkDown, attributes: ['htmlContent', 'markDownContent', 'description'] },
+            { model: db.Code, as: 'positionData', attributes: ['value_vi'] },
+          ],
+          raw: true,
+          nest: true,
+        });
+        resolve({
+          errCode: 0,
+          data: docData,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  });
+}

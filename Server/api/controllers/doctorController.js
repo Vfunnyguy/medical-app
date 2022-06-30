@@ -1,4 +1,4 @@
-import { getAllDoctor, getTopDoctor, saveDoctorInfo } from '../service/service_Doctor';
+import { getAllDoctor, getTopDoctor, saveDoctorInfo,getDocById } from '../service/service_Doctor';
 const doctorController = {
   getTopDoctors: async (req, res) => {
     var limit = req.query.limit || 10;
@@ -37,5 +37,18 @@ const doctorController = {
       console.log(e);
     }
   },
+  getDoctorDetailById:async(req,res)=>{
+    try{
+      let docInfo= await getDocById(req.query.id);
+      return res.status(200).json(docInfo);
+    }catch(e){
+      console.log(e);
+      return res.status(500).json({
+        errCode: -1,
+        message: 'Internal server error',
+      });
+    }
+  }
 };
+
 export default doctorController;
