@@ -1,13 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as action from '../../../store/actions/index';
-import MarkdownIt from 'markdown-it'
-import MdEditor from 'react-markdown-editor-lite';
-import 'react-markdown-editor-lite/lib/index.css';
-const mdParser=new MarkdownIt()
-function handleEditorChange({html,text}){
-  console.log(html,text)
-};
+
 
 class UserTable extends Component {
   constructor(props) {
@@ -78,7 +72,7 @@ class UserTable extends Component {
               })}
           </tbody>
         </table>
-       <MdEditor style={{ height: '500px',width:'100%' }} renderHTML={text => mdParser.render(text)} onChange={handleEditorChange} />
+      
       </div>
       </>
     );

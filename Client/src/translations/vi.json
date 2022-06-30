@@ -29,10 +29,12 @@
         "admin": {
             "manage": "Hệ thống ",
             "manage-doctor":"Thêm người dùng ",
-            "manage-user":"Quản lý người dùng",
-            "crud":"Quản lý người dùng",
+            "manage-user":" Quản lý người dùng",
+            "crud":"Trang Quản lý", 
             "spectality":"Chuyên khoa",
-            "manage-clinic":"Phòng khám"
+            "manage-clinic":"Phòng khám",
+            "manage-docInfo":"Quản lý thông tin bác sĩ"
+            
            
         }
     },

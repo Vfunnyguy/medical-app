@@ -6,8 +6,8 @@ export const adminMenu = [
                 name: 'menu.admin.crud',link:'/system/user-manage',
                
             },
-            { name: 'menu.admin.manage-doctor', link: '/system/user-doctor' },
-            // { name: 'menu.admin.manage-user', link: '/system/user-admin' },
+            { name: 'menu.admin.manage-doctor', link: '/system/user-crud' },
+            { name: 'menu.admin.manage-docInfo', link: '/system/user-crud-doc' },
         ]
     },
     {

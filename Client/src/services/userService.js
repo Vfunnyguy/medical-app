@@ -10,15 +10,31 @@ const createUserApi = (data) => {
   return axios.post('/api/create-user', data);
 };
 const deleteUserApi = (userId) => {
-  return axios.delete(`/api/deleteUser`,{data:{id:userId}});
+  return axios.delete(`/api/deleteUser`, { data: { id: userId } });
 };
-const getCodeApi=(type)=>{
+const getCodeApi = (type) => {
   return axios.get(`/api/code?type=${type}`);
-}
-const editUserApi=(typeI)=>{
-return axios.put(`/api/editUser`,{data:typeI});
-}
-const getTopDoctorApi=(limit)=>{
+};
+const editUserApi = (typeI) => {
+  return axios.put(`/api/editUser`, { data: typeI });
+};
+const getTopDoctorApi = (limit) => {
   return axios.get(`/api/get-top-doctor?limit=${limit}`);
+};
+const getAllDoctorApi = () => {
+  return axios.get(`/api/get-all-doctor`);
+};
+const saveDoctorInfoApi = (data) => {
+  return axios.post('/api/save-doc-info', data);
 }
-export { handleLoginApi, getAllUserApi, createUserApi, deleteUserApi ,getCodeApi,editUserApi,getTopDoctorApi};
+export {
+  handleLoginApi,
+  getAllUserApi,
+  createUserApi,
+  deleteUserApi,
+  getCodeApi,
+  editUserApi,
+  getTopDoctorApi,
+  getAllDoctorApi,
+  saveDoctorInfoApi,
+};

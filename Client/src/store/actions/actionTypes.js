@@ -25,6 +25,10 @@ const actionTypes = Object.freeze({
     EDIT_FAIL:'EDIT_FAIL',
     GET_DOC_SUCCESS:'GET_DOC_SUCCESS',
     GET_DOC_FAIL:'GET_DOC_FAIL',
+    GET_All_DOC_SUCCESS:'GET_All_DOC_SUCCESS',
+    GET_All_DOC_FAIL:'GET_All_DOC_FAIL',
+    SAVE_DOC_INFO_SUCCESS:'SAVE_DOC_INFO_SUCCESS',
+    SAVE_DOC_INFO_FAIL:'SAVE_DOC_INFO_FAIL',
 })
 
 export default actionTypes;

@@ -6,6 +6,8 @@ import {
   deleteUserApi,
   editUserApi,
   getTopDoctorApi,
+  getAllDoctorApi,
+  saveDoctorInfoApi,
 } from '../../services/userService';
 import { toast } from 'react-toastify';
 
@@ -150,58 +152,104 @@ export const deleteUserStart = (id) => {
   };
 };
 export const deleteUserSuccess = () => ({
-  type:' DEL_SUCCESS',
+  type: ' DEL_SUCCESS',
 });
 export const deleteUserEnd = () => ({
   type: 'DEL_END',
 });
-export const editUser=(data)=>{
-  return async(dispatch,getState)=>{
-    try{
-      let res=await editUserApi(data);
+export const editUser = (data) => {
+  return async (dispatch, getState) => {
+    try {
+      let res = await editUserApi(data);
       console.log(res.message);
-      if(res.message&&res.message.errCode===0){
+      if (res.message && res.message.errCode === 0) {
         toast.success('Sửa thành công');
         dispatch(editUserSuccess());
         dispatch(getUserStart());
-      }else{
+      } else {
         toast.error('Không thể sửa');
         dispatch(editUserEnd());
       }
-    }catch(error){
+    } catch (error) {
       toast.error('Không thể sửa');
       dispatch(editUserEnd());
       console.log(error);
     }
-  }
-}
-export const editUserSuccess=()=>({
-  type:actionTypes.EDIT_SUCCESS,
-
-})
-export const editUserEnd=()=>({
-  type:actionTypes.EDIT_FAIL
-})
-export const getTopDoctor=()=>{
-  return async(dispatch,getState)=>{
-    try{
-      let res=await getTopDoctorApi('');
+  };
+};
+export const editUserSuccess = () => ({
+  type: actionTypes.EDIT_SUCCESS,
+});
+export const editUserEnd = () => ({
+  type: actionTypes.EDIT_FAIL,
+});
+export const getTopDoctor = () => {
+  return async (dispatch, getState) => {
+    try {
+      let res = await getTopDoctorApi('');
       console.log(res);
-      if(res&&res.errCode===0){
+      if (res && res.errCode === 0) {
         dispatch({
-          type:actionTypes.GET_DOC_SUCCESS,
-          data:res.data
+          type: actionTypes.GET_DOC_SUCCESS,
+          data: res.data,
         });
-      }else{
+      } else {
         dispatch({
-          type:actionTypes.GET_DOC_FAIL,
-        })
+          type: actionTypes.GET_DOC_FAIL,
+        });
       }
-    }catch(error){
+    } catch (error) {
       console.log(error);
       dispatch({
-        type:actionTypes.GET_DOC_FAIL
-      })
+        type: actionTypes.GET_DOC_FAIL,
+      });
     }
-  }
-}
+  };
+};
+export const getAllDoctor = () => {
+  return async (dispatch, getState) => {
+    try {
+      let res = await getAllDoctorApi();
+      console.log(res);
+      if (res && res.errCode === 0) {
+        dispatch({
+          type: actionTypes.GET_All_DOC_SUCCESS,
+          data: res.data,
+        });
+      } else {
+        dispatch({
+          type: actionTypes.GET_All_DOC_FAIL,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      dispatch({
+        type: actionTypes.GET_All_DOC_FAIL,
+      });
+    }
+  };
+};
+export const saveDocInfo = (data) => {
+  return async (dispatch, getState) => {
+    try {
+      let res = await saveDoctorInfoApi(data);
+      console.log(res);
+      if (res && res.errCode === 0) {
+        toast.success('Lưu thành công');
+        dispatch({
+          type: actionTypes.SAVE_DOC_INFO_SUCCESS,
+        });
+      } else {
+        toast.error('Không thể lưu');
+        dispatch({
+          type: actionTypes.SAVE_DOC_INFO_FAIL,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      dispatch({
+        type: actionTypes.SAVE_DOC_INFO_FAIL,
+      });
+    }
+  };
+};
