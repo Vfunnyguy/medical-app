@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import HeaderHome from '../components/Home/headerHome';
 import Banner from '../components/banner/banner';
 import Carousel from '../components/carousel';
+import HeaderHome from '../components/Home/headerHome';
 class HomePage extends Component {
   render() {
     return (

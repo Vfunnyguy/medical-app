@@ -4,6 +4,8 @@ import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite';
 import 'react-markdown-editor-lite/lib/index.css';
 import Select from 'react-select';
+import {crud_action} from '../../utils' 
+import { getDetailDoctor } from '../../services/userService';
 import * as action from '../../store/actions/adminActions'
 const mdParser = new MarkdownIt();
 
@@ -12,11 +14,12 @@ class DocInfo extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      contentM: '',
-      contentH: '',
+     markDownContent: '',
+     htmlContent: '',
       selectedOption: '',
       description:'',
-      docList:[]
+      docList:[],
+      oldData:false 
     };
   }
    
@@ -46,22 +49,42 @@ class DocInfo extends Component {
   
   handleEditorChange=({html,text})=>{
     this.setState({
-      contentM: text,
-      contentH: html
+     markDownContent: text,
+     htmlContent: html
     })
   }
   handleSaveContent=()=>{
+    let {oldData}=this.state
     this.props.saveInfo({
         docID:this.state.selectedOption.value,
         htmlContent:this.state.contentH,
         markDownContent:this.state.contentM,
         description:this.state.description,
+        action:oldData===true?crud_action.edit:crud_action.create
     })
  
   }
-  handleChange = (selectedOption) => {
-    this.setState({ selectedOption });
+  handleChangeSelect = async (selectedOption) => {
+  this.setState({ selectedOption });
+  let res=await getDetailDoctor(selectedOption.value)
+  if(res&&res.errCode===0&&res.data&&res.data.MarkDown){
+   let markdown=res.data.MarkDown
+    this.setState({
+      htmlContent:markdown.htmlContent,
+      markDownContent:markdown.markDownContent,
+      description:markdown.description,
+      oldData:true
+    })
+  }else{
+    this.setState({
+      htmlContent:'',
+      markDownContent:'',
+      description:'',
+      oldData:false
+    })
+  }
     console.log(selectedOption);
+    console.log(res);
   };
   handleChangeDescription=(e)=>{
     this.setState({
@@ -70,7 +93,8 @@ class DocInfo extends Component {
   }
 
   render() {
-    
+    console.log(this.state);
+    let {oldData}=this.state
     return (
       <div className="section">
         <h1 className="is-3 title center">Tạo thông tin bác sĩ</h1>
@@ -81,7 +105,7 @@ class DocInfo extends Component {
               <Select
                 value={this.state.selectedOption}
                 options={this.state.docList}
-                onChange={this.handleChange}
+                onChange={this.handleChangeSelect}
               />
             </div>
             <div className="column">
@@ -96,9 +120,14 @@ class DocInfo extends Component {
             style={{ height: '500px', width: '100%' }}
             renderHTML={(text) => mdParser.render(text)}
             onChange={this.handleEditorChange}
+            value={this.state.markDownContent}
           />
         </div>
-        <button className='w-100 is-info button'onClick={this.handleSaveContent()}>Lưu thông tin</button>
+        <button className='w-100 is-info button'onClick={()=>this.handleSaveContent()}>
+        {
+          oldData===true?'Cập nhật':'Lưu'
+        }
+        </button>
       </div>
     );
   }

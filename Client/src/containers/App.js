@@ -12,10 +12,9 @@ import { path } from '../utils'
 
 import Home from '../routes/Home';
 import Login from './Auth/Login';
-
+import DocDetail from '../components/Doctor/docDetail';
 import System from '../routes/System';
 import HomePage from '../pages/home';
-
 
 import ConfirmModal from '../components/ConfirmModal';
 import Footer from './footer';
@@ -53,6 +52,7 @@ class App extends Component {
                                 <Route path={path.LOGIN} component={userIsNotAuthenticated(Login)} />
                                 <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
                                 <Route path={path.HomePage} component={(HomePage)} />
+                                <Route path={path.DETAIL_DOCTOR} component={(DocDetail)} />
                             </Switch>
                             <Footer/>
                         </main>

@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions';
-
+import {withRouter}from 'react-router'
 
 class MetVideo extends Component {
   constructor(props) {
@@ -21,6 +21,12 @@ class MetVideo extends Component {
   componentDidMount() {
     this.props.loadTopDoctor();
   }
+  handleViewDetail=(doctor)=>{
+    if(this.props.history){
+
+      this.props.history.push(`/detail-doctor/${doctor.id}`)
+    }
+  }
   render() {
     let topDoctors = this.state.doctorArr;
     return (
@@ -37,11 +43,11 @@ class MetVideo extends Component {
             }
             let docName = `${doctor.positionData.value_vi}, ${doctor.fullName}`;
             return (
-              <div className="column ">
+              <div className="column " key={index}>
         <div className="card_video "  >
              <div className="cover" >
                  <img src={img64} alt=""/>
-                <div className="btn-wrap"><button className="play-btn"><i className="fas fa-video    "></i></button></div>
+                <div className="btn-wrap"><button className="play-btn" onClick={()=>this.handleViewDetail(doctor)} ><i className="fas fa-video    "></i></button></div>
              </div>
              <div className="descrip">
                  <p className="doc-name is-capitalized text-white">{docName}</p>
@@ -67,6 +73,6 @@ const mapDispatchToProps = (dispatch) => {
     loadTopDoctor: () => dispatch(actions.getTopDoctor()),
   };
 };
-export default connect(mapStateToProps, mapDispatchToProps)(MetVideo);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(MetVideo));
 
    
