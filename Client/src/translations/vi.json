@@ -36,6 +36,10 @@
             "manage-docInfo":"Quản lý thông tin bác sĩ"
             
            
+        },
+        "doctor":{
+            "manage": "Quản lý ",
+            "manage-schedule":"Quản lý lịch khám"
         }
     },
     "system": {

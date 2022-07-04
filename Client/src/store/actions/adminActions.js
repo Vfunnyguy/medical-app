@@ -253,3 +253,26 @@ export const saveDocInfo = (data) => {
     }
   };
 };
+export const getSchedule = () => {
+     return async(dispatch, getState) => {
+        try {
+            let res = await getCodeApi('TIME');
+           
+            if (res && res.errCode === 0) {
+                dispatch({
+                    type: actionTypes.GET_SCHEDULE_SUCCESS,
+                    dataTime: res.data,
+                });
+            } else {
+                dispatch({
+                    type: actionTypes.GET_SCHEDULE_FAIL,
+                });
+            }
+        } catch (error) {
+            console.log(error);
+            dispatch({
+                type: actionTypes.GET_SCHEDULE_FAIL,
+            });
+        }
+    }
+     }

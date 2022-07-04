@@ -134,12 +134,13 @@ class DocInfo extends Component {
 }
 const mapStateToProps = (state) => {
   return {
-    allDoc:state.admin.allDoctor
+    allDoc:state.admin.allDoctor,
+    
   };
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-    getAllDoc:(id)=>dispatch(action.getAllDoctor()),
+    getAllDoc:()=>dispatch(action.getAllDoctor()),
     saveInfo:(data)=>dispatch(action.saveDocInfo(data))
   };
 };

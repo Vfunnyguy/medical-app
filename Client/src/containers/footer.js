@@ -14,17 +14,15 @@ const Footer = () => {
   return (
     <footer className="footer">
       <div className="content has-text-centered">
-        <span>
-          <a href="https://bulma.io">
-            <img
-              src="https://bulma.io/images/made-with-bulma.png"
-              alt="Made with Bulma"
-              width="128"
-              height="24"
-            />
-          </a>
-        </span>
-          by <a href="https://github.com/Vfunnyguy">Nguyễn Hoàng Việt </a>
+        <p>
+          <strong>
+          This website is developed 
+          </strong>{' '}
+          by <a href="https://github.com/Vfunnyguy">Nguyễn Hoàng Việt </a>. The source code is
+          licensed
+           <a href="http://opensource.org/licenses/mit-license.php"> MIT</a>. The website content is
+          licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
+        </p>
       </div>
 
       {isBottom && (

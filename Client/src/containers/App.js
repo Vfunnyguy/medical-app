@@ -15,7 +15,7 @@ import Login from './Auth/Login';
 import DocDetail from '../components/Doctor/docDetail';
 import System from '../routes/System';
 import HomePage from '../pages/home';
-
+import DocRoutes from '../routes/Doctor';
 import ConfirmModal from '../components/ConfirmModal';
 import Footer from './footer';
 
@@ -51,6 +51,7 @@ class App extends Component {
                                 <Route path={path.HOME} exact component={(Home)} />
                                 <Route path={path.LOGIN} component={userIsNotAuthenticated(Login)} />
                                 <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
+                                <Route path={'/doctor/'} component={userIsAuthenticated(DocRoutes)} />
                                 <Route path={path.HomePage} component={(HomePage)} />
                                 <Route path={path.DETAIL_DOCTOR} component={(DocDetail)} />
                             </Switch>

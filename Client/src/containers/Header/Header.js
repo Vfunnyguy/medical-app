@@ -1,20 +1,42 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
+import _ from 'lodash';
 import * as actions from "../../store/actions";
 import Navigator from '../../components/Navigator';
-import { adminMenu } from './menuApp';
+import { adminMenu,doctorMenu } from './menuApp';
 
 
 class Header extends Component {
+    constructor(props){
+        super(props)
+        this.state={
+            menuApp:[]
+        }
+    }
+    componentDidMount(){
+        let {userInfo}=this.props
+        let menu=[]
+        
+            let role=userInfo.roleID
+            console.log(role);
+            if(role==='R1'){
 
+              menu=adminMenu
+            }
+            if(role==='R2'){
+                menu=doctorMenu
+            }
+        
+        this.setState({menuApp:menu})
+    }
     render() {
         const { processLogout,userInfo } = this.props;
+        console.log(this.state);
         return (
             <aside className="menu  fs-18 is-fullheight p3">
                 {/* thanh navigator */}
                 <ul className="menu-list">
-                    <Navigator menus={adminMenu} />
+                    <Navigator menus={this.state.menuApp} />
                 </ul>
 
                 {/* nút logout */}

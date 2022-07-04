@@ -60,7 +60,11 @@ class Login extends Component {
       showPassword: !this.state.showPassword,
     });
   };
-
+  handleKeyDown = (e) => {
+    if (e.keyCode === 13) {
+      this.handleLogin();
+    }
+  }
   render() {
     return (
       <div className="login-page  ">
@@ -96,6 +100,7 @@ class Login extends Component {
                     type={this.state.showPassword ? 'text' : 'password'}
                     value={this.state.password}
                     onChange={(e) => this.handleOnChangePassword(e)}
+                    onKeyDown={(e) => this.handleKeyDown(e)}
                   />
                   <span
                     className=" login-page__pass icon is-small is-right  "
