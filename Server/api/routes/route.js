@@ -17,11 +17,14 @@ let initWebRoutes = (app) => {
   router.post('/api/create-user', userControl.handleCreateUser);
   router.put('/api/editUser', userControl.handleEditUser);
   router.delete('/api/deleteUser', userControl.handleDeleteUser);
-  router.get('/api/code',userControl.getCodeApi)
-  router.get('/api/get-top-doctor',doctorController.getTopDoctors)
-  router.get('/api/get-all-doctor',doctorController.getAllDoctors)
-  router.post('/api/save-doc-info',doctorController.saveDoctorInfos)
-  router.get('/api/get-doctor-byID',doctorController.getDoctorDetailById)
+  router.get('/api/code', userControl.getCodeApi)
+  router.get('/api/get-top-doctor', doctorController.getTopDoctors)
+  router.get('/api/get-all-doctor', doctorController.getAllDoctors)
+  router.post('/api/save-doc-info', doctorController.saveDoctorInfos)
+  router.get('/api/get-doctor-byID', doctorController.getDoctorDetailById)
+  router.post('/api/bulk-schedule-post', doctorController.bulkCreateSchedule)
+  router.get('/api/get-schedule-byDate', doctorController.getScheduleByDate)
+
   return app.use('/', router);
 };
 

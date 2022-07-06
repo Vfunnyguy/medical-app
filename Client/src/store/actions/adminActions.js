@@ -210,7 +210,6 @@ export const getAllDoctor = () => {
   return async (dispatch, getState) => {
     try {
       let res = await getAllDoctorApi();
-      console.log(res);
       if (res && res.errCode === 0) {
         dispatch({
           type: actionTypes.GET_All_DOC_SUCCESS,

@@ -2,6 +2,7 @@ import React ,{Component}from 'react'
 import {connect}from 'react-redux'
 import {getDetailDoctor}from '../../services/userService'
 import HeaderHome from '../Home/headerHome'
+import DoctorSchedule from './doctorSchedule'
 class DocDetail extends Component{
     constructor(props){
         super(props)
@@ -21,7 +22,6 @@ class DocDetail extends Component{
         }
     }
     render(){
-        console.log(this.state);
         var detailDoc=this.state.docDataDetail
         let docName=''
         if(detailDoc&& detailDoc.positionData){
@@ -53,7 +53,9 @@ class DocDetail extends Component{
                 </div>
             </div>
             <div className='box'>
-              
+              <DoctorSchedule
+              docIDF={detailDoc&&detailDoc.id?detailDoc.id:-1}
+              />
             </div>
             <div className='box'>
                 <section className='section'>

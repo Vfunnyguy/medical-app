@@ -2,17 +2,17 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 class HeaderHome extends Component {
-  
+
   render() {
     return (
       <nav className="navbar is-info ">
         <div className="navbar-brand">
 
 
-            <Link to="/home" className="navbar-item">
+          <Link to="/home" className="navbar-item">
             <i className="fas fa-medkit is-medium fs-18 mr-2 "></i>
             <span className='is-uppercase fs-18'>Medical Booking</span>
-            </Link>
+          </Link>
           <span
             role="button"
             className="navbar-burger"
@@ -40,13 +40,13 @@ class HeaderHome extends Component {
           <div className="navbar-end">
             <div className="navbar-item">
               <div className="control has-icons-left">
-              <input className="input" type="text" placeholder="Tìm Kiếm" />
-               <span className='icon is-small is-left'>
-               <i className="fas fa-search    "></i>
-               </span>
+                <input className="input" type="text" placeholder="Tìm Kiếm" />
+                <span className='icon is-small is-left'>
+                  <i className="fas fa-search    "></i>
+                </span>
               </div>
             </div>
-           
+
           </div>
         </div>
       </nav>
@@ -55,9 +55,8 @@ class HeaderHome extends Component {
 }
 const mapStateToProps = (state) => {
   return {
-        isLoggedIn: state.user.isLoggedIn,
-        
-       language: state.app.language,
+    isLoggedIn: state.user.isLoggedIn,
+    language: state.app.language,
   };
 };
 const masDispatchToProps = (dispatch) => {

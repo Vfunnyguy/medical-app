@@ -5,16 +5,17 @@ import moment from 'moment';
 import DatePicker from '../Input/DatePicker';
 import _ from 'lodash';
 import { toast } from 'react-toastify';
-import { crud_action ,dateFormat} from '../../utils';
+import { crud_action, dateFormat } from '../../utils';
 import * as action from '../../store/actions';
+import { postbulkSchedule }from '../../services/userService'
 class ManageSchedule extends Component {
   constructor(props) {
     super(props);
     this.state = {
       listDoctor: [],
       selectDoctor: '',
-      curentDate: '',
-      rangeItem: [],
+      currentDate: '',
+      rangeTime: [],
     };
   }
   componentDidMount() {
@@ -29,12 +30,12 @@ class ManageSchedule extends Component {
       });
     }
     if (prevProps.allSchedule !== this.props.allSchedule) {
-        var data=this.props.allSchedule
-        if(data&&data.length>0){
-            data=data.map(item=>({...item,isSelected:false}))
-        }
+      var data = this.props.allSchedule
+      if (data && data.length > 0) {
+        data = data.map(item => ({ ...item, isSelected: false }))
+      }
       this.setState({
-        rangeItem:data
+        rangeTime: data
       });
     }
   }
@@ -54,21 +55,57 @@ class ManageSchedule extends Component {
     this.setState({ selectDoctor: selectOption });
   };
   handleOndateChange = (date) => {
-    this.setState({ curentDate: date[0] });
+    this.setState({ currentDate: date[0] });
   };
-  handleClickTime=(time)=>{
-    let {rangeItem}=this.state;
-   if(rangeItem&&rangeItem.length>0){
-    rangeItem=rangeItem.map(item=>{
-        if(item.id===time.id)item.isSelected = !item.isSelected;
+  handleClickTime = (time) => {
+    let { rangeTime } = this.state;
+    if (rangeTime && rangeTime.length > 0) {
+      rangeTime = rangeTime.map(item => {
+        if (item.id === time.id) item.isSelected = !item.isSelected;
         return item;
+      })
+      this.setState({ rangeTime: rangeTime })
+    }
+  }
+  handleSaveSchedule = async () => {
+    let { rangeTime, selectDoctor, currentDate } = this.state
+    let result = []
+    if (!currentDate) {
+      toast.error('Chưa có ngày')
+      return
+    }
+    if (selectDoctor && _.isEmpty(selectDoctor)) {
+      toast.error('Chưa chọn bác sĩ')
+      return;
+    }
+    let formatDate = new Date(currentDate).getTime()
+    if (rangeTime && rangeTime.length > 0) {
+      let selectTime = rangeTime.filter(item => item.isSelected === true)
+      if (selectTime && selectTime.length > 0) {
+        selectTime.map((sch, idx) => {
+          let obj = {}
+          obj.docID = selectDoctor.value
+          obj.date = formatDate
+          obj.timeType = sch.keyMap
+          result.push(obj)
+        })
+      } else {
+        toast.error('Chưa chọn giờ')
+        return
+      }
+    }
+    
+    let res = await postbulkSchedule({
+      arrSchedule:result,
+      docID:selectDoctor.value,
+      formatDate:formatDate
     })
-    this.setState({rangeItem:rangeItem})
-   }
+    console.log(res);
+ 
+    
   }
   render() {
-    let { rangeItem } = this.state;
-  console.log(this.state);
+    let { rangeTime } = this.state;
     return (
       <div>
         <h1 className="title center">Manage Schedule</h1>
@@ -86,23 +123,23 @@ class ManageSchedule extends Component {
               <p>Chọn ngày</p>
               <DatePicker
                 onChange={this.handleOndateChange}
-                value={this.state.curentDate}
+                value={this.state.currentDate}
                 minDate={new Date()}
               />
             </div>
           </div>
           <div className="columns is-multiline is-mobile">
-            {rangeItem &&
-              rangeItem.length > 0 &&
-              rangeItem.map((it, idx) => {
+            {rangeTime &&
+              rangeTime.length > 0 &&
+              rangeTime.map((it, idx) => {
                 return (
                   <div className="column is-one-quarter" key={idx}>
-                    <span className="tag is-light is-large pointer">{it.value_vi}</span>
+                    <span className={`tag  is-large pointer ${it.isSelected === false ? 'is-info' : 'is-danger'}`} onClick={() => this.handleClickTime(it)}>{it.value_vi}</span>
                   </div>
                 );
               })}
           </div>
-          <button className="button is-primary">
+          <button className="button is-primary" onClick={() => this.handleSaveSchedule()}>
             Lưu <i className="fas fa-save pl-2   "></i>
           </button>
         </div>
