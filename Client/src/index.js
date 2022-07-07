@@ -13,13 +13,13 @@ import reduxStore, { persistor } from './redux';
 
 const renderApp = () => {
     ReactDOM.render(
-        <React.StrictMode>
+       
         <Provider store={reduxStore}>
              <IntlProviderWrapper>
                 <App persistor={persistor}/>
             </IntlProviderWrapper> 
         </Provider>
-        </React.StrictMode>,
+       ,
         document.getElementById('root')
     );
 };

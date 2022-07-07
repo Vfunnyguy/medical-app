@@ -274,4 +274,16 @@ export const getSchedule = () => {
             });
         }
     }
-     }
+}
+export function getAllDocInfo(){
+return async(dispatch,getState)=>{
+  try {
+    dispatch({type:actionTypes.GET_ALL_DOC_INFO_PENDING});
+    let resPrice=await getCodeApi('PRICE');
+    let resPAYMENT=await getCodeApi('PAYMENT');
+    let restPronvice=await getCodeApi('PRONVINCE');
+  } catch (e) {
+    console.log(e,{cause:e});
+  }
+ }
+}

@@ -41,7 +41,7 @@ const doctorController = {
         errCode: -1,
         message: 'Internal server error',
       });
-      console.log(e);
+      
     }
   },
   getDoctorDetailById: async (req, res) => {
@@ -69,20 +69,17 @@ const doctorController = {
       })
     }
   },
-  getScheduleByDate:async(req,res)=>{
-  try {
-    let dateSchedule=await getSchDate(req.query.docID,req.query.date)
-    return res.status(200).json({
-      errCode:0,
-      message:'Ok'
-    })
-  } catch (e) {
-    console.log(e);
-    return res.status(500).json({
-      errCode:-1,
-      message:'Server error'
-    })
-  }
+  getScheduleByDate: async (req, res) => {
+    try {
+      let data= await getSchDate(req.query.docID, req.query.date)
+      return res.status(200).json(data)
+    } catch (e) {
+      console.log(e);
+      return res.status(500).json({
+        errCode: -1,
+        message: 'Server error'
+      })
+    }
   }
 };
 

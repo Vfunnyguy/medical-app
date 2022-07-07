@@ -16,6 +16,7 @@ class ManageSchedule extends Component {
       selectDoctor: '',
       currentDate: '',
       rangeTime: [],
+
     };
   }
   componentDidMount() {
@@ -100,12 +101,18 @@ class ManageSchedule extends Component {
       docID:selectDoctor.value,
       formatDate:formatDate
     })
+    if(res&&res.errCode===0){
+      toast.success('tạo thành công')
+    }else{
+      toast.error('Không thề tạo')
+    }
     console.log(res);
  
     
   }
   render() {
     let { rangeTime } = this.state;
+    let yesterday=new Date(new Date().setDate(new Date().getDate()-1))
     return (
       <div>
         <h1 className="title center">Manage Schedule</h1>
@@ -124,7 +131,8 @@ class ManageSchedule extends Component {
               <DatePicker
                 onChange={this.handleOndateChange}
                 value={this.state.currentDate}
-                minDate={new Date()}
+                minDate={yesterday}
+
               />
             </div>
           </div>

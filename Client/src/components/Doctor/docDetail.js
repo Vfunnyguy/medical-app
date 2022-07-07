@@ -7,12 +7,16 @@ class DocDetail extends Component{
     constructor(props){
         super(props)
         this.state={
-            docDataDetail:{}
+            docDataDetail:{},
+            currentDocID:-1
         }
     }
     async componentDidMount(){
         if(this.props.match&&this.props.match.params&&this.props.match.params.id){
             let id=this.props.match.params.id
+            this.setState({
+                currentDocID:id
+            })
             let res=await getDetailDoctor(id)
             if(res&&res.errCode===0){
                 this.setState({
@@ -22,7 +26,7 @@ class DocDetail extends Component{
         }
     }
     render(){
-        var detailDoc=this.state.docDataDetail
+        let detailDoc=this.state.docDataDetail
         let docName=''
         if(detailDoc&& detailDoc.positionData){
             docName=`${detailDoc.positionData.value_vi},${detailDoc.fullName}`
@@ -54,7 +58,7 @@ class DocDetail extends Component{
             </div>
             <div className='box'>
               <DoctorSchedule
-              docIDF={detailDoc&&detailDoc.id?detailDoc.id:-1}
+              docIDF={this.state.currentDocID}
               />
             </div>
             <div className='box'>

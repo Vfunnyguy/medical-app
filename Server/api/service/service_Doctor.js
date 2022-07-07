@@ -143,17 +143,15 @@ export function getDocById(inputID) {
 export const bulkScheduleCreate = (dataInsert) => {
   return new Promise(async (resolve, reject) => {
     try {
-      console.log(dataInsert);
-    
-        let schedule = dataInsert.arrSchedule
-        if (schedule && schedule.length > 0) {
-          schedule = schedule.map(item => {
-            item.maxNumber = 10
-            return item
-          })
-        }
-        console.log(schedule);
-      
+      let schedule = dataInsert.arrSchedule
+      if (schedule && schedule.length > 0) {
+        schedule = schedule.map(item => {
+          item.maxNumber = 10
+          return item
+        })
+      }
+
+
       let isExist = await db.Schedule.findAll({
         where: {
           docID: dataInsert.docID,
@@ -163,20 +161,15 @@ export const bulkScheduleCreate = (dataInsert) => {
         raw: true
 
       })
-      if (isExist && isExist.length > 0) {
-        isExist = isExist.map(item => {
-          item.date = new Date(item.date).getTime()
-          return item
-        })
-      }
-      let toCreate = _.differenceWith(schedule,(a, b) => {
-        return a.timeType === b.timeType && a.date === b.date
+
+      let toCreate = _.differenceWith(schedule, isExist, (a, b) => {
+        return a.timeType === b.timeType && +a.date === +b.date
       })
-      if(toCreate&& toCreate.length>0){
+      if (toCreate && toCreate.length > 0) {
 
         await db.Schedule.bulkCreate(toCreate)
       }
-      
+
       resolve({
         errCode: 0,
         errMessage: 'Ok'
@@ -188,19 +181,27 @@ export const bulkScheduleCreate = (dataInsert) => {
   })
 
 }
-export function getSchDate(docID,date){
-  return new Promise(async(resolve, reject) => {
+export function getSchDate(docID, date) {
+  return new Promise(async (resolve, reject) => {
     try {
-      let scheduleDate=await db.Schedule.findAll({
-        where:{
-          docID:docID,
-          date:date
-        }
+      let scheduleDate = await db.Schedule.findAll({
+        where: {
+          docID: docID,
+          date: date
+        },
+        include: [{
+          model: db.Code,
+          as: 'timeTypeData',
+          attributes: ['value_vi']
+        }],
+        raw: false,
+        nest: true
       })
-      if(!scheduleDate)scheduleDate=[]
+
+      if (!scheduleDate) scheduleDate = []
       resolve({
-        errCode:0,
-        data:scheduleDate
+        errCode: 0,
+        data: scheduleDate
       })
     } catch (e) {
       console.log(e);

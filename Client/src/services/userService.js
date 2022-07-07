@@ -42,8 +42,8 @@ const getDetailDoctor = (inputID) => {
 const postbulkSchedule = (bulkData) => {
   return axios.post('/api/bulk-schedule-post', bulkData)
 }
-const getScheduleByDate=(id,date)=>{
-  return axios.get(`/api/get-schedule-byDate?docID=${id}&date=${date}`)
+const getScheduleByDate=(docId,date)=>{
+  return axios.get(`/api/get-schedule-byDate?docID=${docId}&date=${date}`)
 }
 export {
   handleLoginApi,
