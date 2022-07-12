@@ -253,37 +253,53 @@ export const saveDocInfo = (data) => {
   };
 };
 export const getSchedule = () => {
-     return async(dispatch, getState) => {
-        try {
-            let res = await getCodeApi('TIME');
-           
-            if (res && res.errCode === 0) {
-                dispatch({
-                    type: actionTypes.GET_SCHEDULE_SUCCESS,
-                    dataTime: res.data,
-                });
-            } else {
-                dispatch({
-                    type: actionTypes.GET_SCHEDULE_FAIL,
-                });
-            }
-        } catch (error) {
-            console.log(error);
-            dispatch({
-                type: actionTypes.GET_SCHEDULE_FAIL,
-            });
-        }
+  return async (dispatch, getState) => {
+    try {
+      let res = await getCodeApi('TIME');
+
+      if (res && res.errCode === 0) {
+        dispatch({
+          type: actionTypes.GET_SCHEDULE_SUCCESS,
+          dataTime: res.data,
+        });
+      } else {
+        dispatch({
+          type: actionTypes.GET_SCHEDULE_FAIL,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      dispatch({
+        type: actionTypes.GET_SCHEDULE_FAIL,
+      });
     }
-}
-export function getAllDocInfo(){
-return async(dispatch,getState)=>{
-  try {
-    dispatch({type:actionTypes.GET_ALL_DOC_INFO_PENDING});
-    let resPrice=await getCodeApi('PRICE');
-    let resPAYMENT=await getCodeApi('PAYMENT');
-    let restPronvice=await getCodeApi('PRONVINCE');
-  } catch (e) {
-    console.log(e,{cause:e});
   }
- }
 }
+export function getAllDocInfo() {
+  return async (dispatch, getState) => {
+    try {
+      dispatch({ type: actionTypes.GET_ALL_DOC_INFO_PENDING });
+      let resPrice = await getCodeApi('PRICE');
+      let resPayment = await getCodeApi('PAYMENT');
+      if (resPrice && resPrice.errCode === 0
+        && resPayment && resPayment.errCode === 0
+       ) {
+        let data = {
+          resPrice: resPrice.data,
+          resPayment: resPayment.data,
+        }
+        dispatch(fetchDocRequireSucess(data))
+      } else {
+        dispatch({ type: actionTypes.GET_ALL_DOC_INFO_REJECT })
+      }
+    } catch (e) {
+      dispatch({ type: actionTypes.GET_ALL_DOC_INFO_REJECT })
+
+      console.log(e, { cause: e });
+    }
+  }
+}
+export const fetchDocRequireSucess = (requiredData) => ({
+  type: actionTypes.GET_ALL_DOC_INFO_FULFILLED,
+  data: requiredData
+})

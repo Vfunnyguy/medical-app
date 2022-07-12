@@ -7,6 +7,7 @@ import Select from 'react-select';
 import { crud_action } from '../../utils'
 import { getDetailDoctor } from '../../services/userService';
 import * as action from '../../store/actions/adminActions'
+import { formatCash } from '../../utils';
 const mdParser = new MarkdownIt();
 
 
@@ -22,10 +23,8 @@ class DocInfo extends Component {
       oldData: false,
       listPrice: [],
       listPayment: [],
-      listProvince: [],
       selectPrice: '',
       selectPayment: '',
-      selectPronvice: '',
       nameClinic: '',
       addressClinic: '',
       note: '',
@@ -34,21 +33,41 @@ class DocInfo extends Component {
 
   componentDidMount() {
     this.props.getAllDoc();
-    // this.props.getAllDocInfo()
+    this.props.getAllDocInfo()
   }
   selectData = (dataI, type) => {
     var result = []
     if (dataI && dataI.length > 0) {
-      dataI.map((it, idx) => {
-        let obj = {}
-        obj.label = it.fullName
-        obj.value = it.id
-        return result.push(obj)
-      })
+      if (type === 'USERS') {
+        dataI.map((it, idx) => {
+          let obj = {}
+          obj.label = it.fullName
+          obj.value = it.id
+          result.push(obj)
+        })
+      }
+      if (type === 'PRICE') {
+        dataI.map((it, idx) => {
+          let obj = {}
+          let formatValue = formatCash(it.value_vi)
+          obj.label = `${formatValue} Đ`
+          obj.value = it.keyMap
+          result.push(obj)
+        })
+      }
+      if (type === 'PAYMENT') {
+        dataI.map((it, idx) => {
+          let obj = {}
+          obj.label = it.value_vi
+          obj.value = it.keyMap
+          result.push(obj)
+        })
+      }
+
     }
     return result
   }
-  componentDidUpdate(prevProps, prevState, snapshot) {
+  componentDidUpdate(prevProps) {
     if (prevProps.allDoc !== this.props.allDoc) {
       let dataSelect = this.selectData(this.props.allDoc, 'USERS')
       this.setState({
@@ -56,14 +75,12 @@ class DocInfo extends Component {
       })
     }
     if (prevProps.allDocInfo !== this.props.allDocInfo) {
-      let { resPay, resPrice, restPronvice } = this.props.allDocInfo
-      let dataSelectprice = this.selectData(resPrice)
-      let dataSelectpay = this.selectData(resPay)
-      let dataSelectpronvice = this.selectData(restPronvice)
+      let { resPayment, resPrice } = this.props.allDocInfo
+      let dataSelectprice = this.selectData(resPrice, 'PRICE')
+      let dataSelectpay = this.selectData(resPayment, 'PAYMENT')
       this.setState({
         listPrice: dataSelectprice,
         listPayment: dataSelectpay,
-        listProvince: dataSelectpronvice
       })
     }
   }
@@ -81,35 +98,73 @@ class DocInfo extends Component {
       htmlContent: this.state.contentH,
       markDownContent: this.state.contentM,
       description: this.state.description,
-      action: oldData === true ? crud_action.edit : crud_action.create
+      action: oldData === true ? crud_action.edit : crud_action.create,
+      selectPrice: this.state.selectPrice.value,
+      selectPayment: this.state.selectPayment.value,
+      nameClinic: this.state.nameClinic,
+      addressClinic: this.state.addressClinic,
+      note: this.state.note
     })
 
   }
   handleChangeSelect = async (selectedOption) => {
-    this.setState({ selectedOption });
+    this.setState({ selectedOption })
+    let { listPrice, listPayment } = this.state
     let res = await getDetailDoctor(selectedOption.value)
-    if (res && res.errCode === 0 && res.data && res.data.MarkDown) {
-      let markdown = res.data.MarkDown
-      this.setState({
-        htmlContent: markdown.htmlContent,
-        markDownContent: markdown.markDownContent,
-        description: markdown.description,
-        oldData: true
-      })
+    if (res && res.errCode === 0 && res.data && res.data.Markdown) {
+      let markdown = res.data.Markdown
+      let addressClinic = '', nameClinic = '', note = '', paymentID = '', priceID = '',
+        selectPayment = '', selectPrice = '';
+      if (res.data.DocInfo) {
+          addressClinic = res.data.DocInfo.addressClinic
+          nameClinic = res.data.DocInfo.nameClinic
+          note = res.data.DocInfo.note
+          priceID = res.data.DocInfo.priceID
+          paymentID = res.data.DocInfo.paymentID;
+        selectPayment = listPayment.find(item => {
+          return item && item.value === paymentID
+        })
+        selectPrice = listPrice.find(item => {
+          return item && item.value === priceID
+        })
+        this.setState({
+          htmlContent: markdown.htmlContent,
+          markDownContent: markdown.markDownContent,
+          description: markdown.description,
+          oldData: true,
+          addressClinic: addressClinic,
+          nameClinic: nameClinic,
+          note: note,
+          selectPrice: selectPrice,
+          selectPayment: selectPayment
+        })
+      }
     } else {
       this.setState({
         htmlContent: '',
         markDownContent: '',
         description: '',
-        oldData: false
+        oldData: false,
+        addressClinic: '',
+        nameClinic: '',
+        note: ''
       })
+
     }
-    console.log(selectedOption);
-    console.log(res);
   };
-  handleChangeDescription = (e) => {
+  handleChangeSelectDoctorInfo = async (selectedOption, name) => {
+    let stateName = name.name
+    let cpState = { ...this.state }
+    cpState[stateName] = selectedOption
     this.setState({
-      description: e.target.value
+      ...cpState
+    })
+  }
+  onChangeText = (e, id) => {
+    let copyState = { ...this.state }
+    copyState[id] = e.target.value
+    this.setState({
+      ...copyState
     })
   }
 
@@ -127,45 +182,50 @@ class DocInfo extends Component {
                 options={this.state.docList}
                 onChange={this.handleChangeSelect}
                 placeholder='Chọn bác sĩ'
+                name='selectedOption'
               />
             </div>
             <div className="column">
 
               <Select
-                value={this.state.selectedOption}
-                options={this.state.docList}
-                onChange={this.handleChangeSelect}
+                value={this.state.selectPayment}
+                options={this.state.listPayment}
+                onChange={this.handleChangeSelectDoctorInfo}
                 placeholder='Chọn cách thức thanh toán'
+                name='selectPayment'
               />
             </div>
             <div className="column">
 
               <Select
-                value={this.state.selectedOption}
-                options={this.state.docList}
-                onChange={this.handleChangeSelect}
+                value={this.state.selectPrice}
+                options={this.state.listPrice}
+                onChange={this.handleChangeSelectDoctorInfo}
                 placeholder='Chọn giá'
-              />
-            </div>
-            <div className="column">
+                name='selectPrice'
 
-              <Select
-                value={this.state.selectedOption}
-                options={this.state.docList}
-                onChange={this.handleChangeSelect}
-                placeholder='Chọn tỉnh thành'
               />
             </div>
+
           </div>
           <div className='columns'>
             <div className='column'>
-              <input placeholder='note' className='input' />
+              <input placeholder='note' className='input'
+                value={this.state.note}
+                onChange={(e) => this.onChangeText(e, 'note')}
+              />
             </div>
             <div className='column'>
-              <input placeholder='địa chỉ phòng khám' className='input' />
+              <input placeholder='địa chỉ phòng khám' className='input'
+                value={this.state.addressClinic}
+                onChange={(e) => this.onChangeText(e, 'addressClinic')}
+              />
             </div>
             <div className='column'>
-              <input placeholder='thành phố' className='input' />
+              <input placeholder='Tên phòng khám' className='input'
+                value={this.state.nameClinic}
+                onChange={(e) => this.onChangeText(e, 'nameClinic')}
+              />
 
             </div>
 
@@ -174,7 +234,7 @@ class DocInfo extends Component {
             <span className="is-4 fw-bold">Thông tin giới thiệu</span>
             <textarea className="textarea is-info"
               value={this.state.description}
-              onChange={(e) => this.handleChangeDescription(e)}
+              onChange={(e) => this.onChangeText(e, 'description')}
             ></textarea>
           </div>
           <MdEditor
@@ -196,7 +256,7 @@ class DocInfo extends Component {
 const mapStateToProps = (state) => {
   return {
     allDoc: state.admin.allDoctor,
-    allDocInfo:state.admin.allDocInfo
+    allDocInfo: state.admin.allDocInfo
 
   };
 };
@@ -204,7 +264,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getAllDoc: () => dispatch(action.getAllDoctor()),
     saveInfo: (data) => dispatch(action.saveDocInfo(data)),
-    getAllDocInfo:()=>dispatch(action.getAllDocInfo())
+    getAllDocInfo: () => dispatch(action.getAllDocInfo())
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(DocInfo);

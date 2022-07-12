@@ -89,7 +89,7 @@ class DoctorSchedule extends Component {
                     </select>
                 </div>
                 <div className="block">
-                    <div className="box is-one-third">
+                    <div className="is-one-third">
                         <h4 className="fw-bold is-uppercase">Lịch khám</h4>
                         {
                             valiableTime && valiableTime.length > 0

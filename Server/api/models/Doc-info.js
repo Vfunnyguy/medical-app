@@ -9,13 +9,15 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      DocInfo.belongsTo(models.User,{foreignKey:'docID'})
+      DocInfo.belongsTo(models.Code,{foreignKey:'priceID',targetKey:'keyMap',as:'priceTypeData'})
+      DocInfo.belongsTo(models.Code,{foreignKey:'paymentID',targetKey:'keyMap',as:'paymentTypeData'})
     }
   }
   DocInfo.init(
     {
       docID: DataTypes.INTEGER,
       priceID: DataTypes.STRING,
-      provinceID: DataTypes.STRING,
       paymentID: DataTypes.STRING,
       addressClinic: DataTypes.STRING,
       nameClinic: DataTypes.STRING,

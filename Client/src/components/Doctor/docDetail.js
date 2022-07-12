@@ -3,6 +3,7 @@ import {connect}from 'react-redux'
 import {getDetailDoctor}from '../../services/userService'
 import HeaderHome from '../Home/headerHome'
 import DoctorSchedule from './doctorSchedule'
+import DocextraInfo from './extraInfo'
 class DocDetail extends Component{
     constructor(props){
         super(props)
@@ -56,11 +57,23 @@ class DocDetail extends Component{
                    </div>
                 </div>
             </div>
-            <div className='box'>
+            <div className='columns'>
+                <div className='column'>
+                <div className='box'>
               <DoctorSchedule
               docIDF={this.state.currentDocID}
               />
             </div>
+                </div>
+                <div className='column'>
+                   <DocextraInfo
+                     docIDF={this.state.currentDocID}
+                   />
+                    
+                </div>
+
+            </div>
+            
             <div className='box'>
                 <section className='section'>
                  {

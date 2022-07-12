@@ -8,7 +8,9 @@ const initialState = {
   users:[],
   topDoctor:[],
   allDoctor:[],
-  allSchedule:[]
+  allSchedule:[],
+  allDocInfo:[]
+
 };
 
 const adminReducer = (state = initialState, action) => {
@@ -88,6 +90,16 @@ const adminReducer = (state = initialState, action) => {
       }
     case actionTypes.GET_SCHEDULE_FAIL:
       state.allSchedule = []
+      return{
+        ...state
+      }
+    case actionTypes.GET_ALL_DOC_INFO_FULFILLED:
+      state.allDocInfo=action.data
+      return{
+        ...state
+      }
+    case actionTypes.GET_ALL_DOC_INFO_REJECT:
+      state.allDocInfo=[]
       return{
         ...state
       }

@@ -32,3 +32,7 @@ export const crud_action={
    delete:'delete',
    read:'read'
 }
+export function formatCash(str) {
+    if (str) return (str + '').replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+    else return 0
+}

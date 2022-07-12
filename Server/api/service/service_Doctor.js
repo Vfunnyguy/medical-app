@@ -17,15 +17,15 @@ export var getTopDoctor = (limitIn) => {
           exclude: ['password'],
         },
         include: [{
-            model: db.Code,
-            as: 'positionData',
-            attributes: ['value_vi']
-          },
-          {
-            model: db.Code,
-            as: 'genderData',
-            attributes: ['value_vi']
-          },
+          model: db.Code,
+          as: 'positionData',
+          attributes: ['value_vi']
+        },
+        {
+          model: db.Code,
+          as: 'genderData',
+          attributes: ['value_vi']
+        },
         ],
         raw: true,
         nest: true,
@@ -62,8 +62,6 @@ export let getAllDoctor = () => {
 export const saveDoctorInfo = (dataInput) => {
   return new Promise(async (resolve, reject) => {
     try {
-      console.log(dataInput.action);
-      console.log(dataInput.docID);
       if (dataInput.action === 'create') {
         await db.MarkDown.create({
           docID: dataInput.docID,
@@ -85,7 +83,31 @@ export const saveDoctorInfo = (dataInput) => {
           docMarkDown.updatedAt = new Date()
           await docMarkDown.save()
         }
-
+      }
+      let anotherDocInfo = await db.DocInfo.findOne({
+        where: {
+          docID: dataInput.docID
+        },
+        raw: false
+      })
+      console.log(anotherDocInfo);
+      if (anotherDocInfo) {
+        anotherDocInfo.docID = dataInput.docID
+        anotherDocInfo.priceID = dataInput.selectPrice
+        anotherDocInfo.paymentID = dataInput.selectPayment
+        anotherDocInfo.nameClinic = dataInput.nameClinic
+        anotherDocInfo.addressClinic = dataInput.addressClinic
+        anotherDocInfo.note = dataInput.note
+        await anotherDocInfo.save()
+      } else {
+        await db.DocInfo.create({
+          docID: dataInput.docID,
+          priceID: dataInput.selectPrice,
+          paymentID: dataInput.selectPayment,
+          nameClinic: dataInput.nameClinic,
+          addressClinic: dataInput.addressClinic,
+          note: dataInput.note
+        })
       }
       resolve({
         errCode: 0,
@@ -114,16 +136,24 @@ export function getDocById(inputID) {
             exclude: ['password'],
           },
           include: [{
-              model: db.MarkDown,
-              attributes: ['htmlContent', 'markDownContent', 'description']
-            },
-            {
-              model: db.Code,
-              as: 'positionData',
-              attributes: ['value_vi']
-            },
+            model: db.MarkDown,
+            attributes: ['htmlContent', 'markDownContent', 'description']
+          },
+          {
+            model: db.Code,
+            as: 'positionData',
+            attributes: ['value_vi']
+          },
+          {
+            model:db.DocInfo,
+            attributes:{exclude:['id','docID']},
+            include:[
+              {model: db.Code,as:'priceTypeData',attributes:['value_vi']},
+              {model: db.Code,as:'paymentTypeData',attributes:['value_vi']}
+            ]
+          }
           ],
-          raw: true,
+          raw: false,
           nest: true,
         });
         if (docData && docData.image) {
