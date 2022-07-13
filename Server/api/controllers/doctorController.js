@@ -4,7 +4,9 @@ import {
   saveDoctorInfo,
   getDocById,
   bulkScheduleCreate,
-  getSchDate
+  getSchDate,
+  getDocExtra,
+  getDocProfileById
 } from '../service/service_Doctor';
 const doctorController = {
   getTopDoctors: async (req, res) => {
@@ -78,6 +80,26 @@ const doctorController = {
       return res.status(500).json({
         errCode: -1,
         message: 'Server error'
+      })
+    }
+  },
+  getExtraInfo:async(req,res)=>{
+    try {
+      let response=await getDocExtra(req.query.docID)
+      return res.status(200).json(response)
+    } catch (e) {
+      console.log(e);
+      return res.status(500).send('server error')
+    }
+  },
+  getProfileDoc:async(req,res)=>{
+    try {
+      let data=await getDocProfileById(req.query.docID)
+      return res.status(200).json(data)
+    } catch (e) {
+      return res.status(500).json({
+        errCode:1,
+        errMsg:'error from server',e
       })
     }
   }

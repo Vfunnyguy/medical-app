@@ -8,6 +8,7 @@ import { crud_action } from '../../utils'
 import { getDetailDoctor } from '../../services/userService';
 import * as action from '../../store/actions/adminActions'
 import { formatCash } from '../../utils';
+
 const mdParser = new MarkdownIt();
 
 
@@ -50,7 +51,7 @@ class DocInfo extends Component {
         dataI.map((it, idx) => {
           let obj = {}
           let formatValue = formatCash(it.value_vi)
-          obj.label = `${formatValue} Đ`
+          obj.label = `${formatValue} VNĐ`
           obj.value = it.keyMap
           result.push(obj)
         })
@@ -95,8 +96,8 @@ class DocInfo extends Component {
     let { oldData } = this.state
     this.props.saveInfo({
       docID: this.state.selectedOption.value,
-      htmlContent: this.state.contentH,
-      markDownContent: this.state.contentM,
+      htmlContent: this.state.htmlContent,
+      markDownContent: this.state.markDownContent,
       description: this.state.description,
       action: oldData === true ? crud_action.edit : crud_action.create,
       selectPrice: this.state.selectPrice.value,
@@ -172,6 +173,8 @@ class DocInfo extends Component {
     let { oldData } = this.state
     return (
       <div className="section">
+         
+
         <h1 className="is-3 title center">Tạo thông tin bác sĩ</h1>
         <div className="box block">
           <div className="columns">

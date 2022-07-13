@@ -34,6 +34,7 @@ const Footer = () => {
           <i className="fas fa-arrow-circle-up w100 fs-30"></i>
         </div>
       )}
+      
     </footer>
   );
 };

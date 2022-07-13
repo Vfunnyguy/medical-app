@@ -4,6 +4,8 @@ import {getDetailDoctor}from '../../services/userService'
 import HeaderHome from '../Home/headerHome'
 import DoctorSchedule from './doctorSchedule'
 import DocextraInfo from './extraInfo'
+import ModalBooking from '../booking/bookModal'
+
 class DocDetail extends Component{
     constructor(props){
         super(props)
@@ -73,7 +75,7 @@ class DocDetail extends Component{
                 </div>
 
             </div>
-            
+         
             <div className='box'>
                 <section className='section'>
                  {
@@ -84,6 +86,7 @@ class DocDetail extends Component{
                 </section>
             </div>
             </div>
+          
             </>
         )
     }

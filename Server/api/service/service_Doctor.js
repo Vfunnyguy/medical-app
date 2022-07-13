@@ -90,7 +90,7 @@ export const saveDoctorInfo = (dataInput) => {
         },
         raw: false
       })
-      console.log(anotherDocInfo);
+
       if (anotherDocInfo) {
         anotherDocInfo.docID = dataInput.docID
         anotherDocInfo.priceID = dataInput.selectPrice
@@ -145,11 +145,11 @@ export function getDocById(inputID) {
             attributes: ['value_vi']
           },
           {
-            model:db.DocInfo,
-            attributes:{exclude:['id','docID']},
-            include:[
-              {model: db.Code,as:'priceTypeData',attributes:['value_vi']},
-              {model: db.Code,as:'paymentTypeData',attributes:['value_vi']}
+            model: db.DocInfo,
+            attributes: { exclude: ['id', 'docID'] },
+            include: [
+              { model: db.Code, as: 'priceTypeData', attributes: ['value_vi'] },
+              { model: db.Code, as: 'paymentTypeData', attributes: ['value_vi'] }
             ]
           }
           ],
@@ -237,6 +237,79 @@ export function getSchDate(docID, date) {
       console.log(e);
       reject(e)
 
+    }
+  })
+}
+export var getDocExtra = (inputID) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      let data = await db.DocInfo.findOne({
+        where: {
+          docID: inputID
+        },
+        attributes: {
+          exclude: ['id', 'docID']
+        },
+        include: [
+          { model: db.Code, as: 'priceTypeData', attributes: ['value_vi'] },
+          { model: db.Code, as: 'paymentTypeData', attributes: ['value_vi'] }
+        ],
+        raw: false,
+        nest: true
+      })
+      if (!data) data = []
+      resolve({
+        errCode: 0,
+        data: data
+      })
+    } catch (error) {
+      reject(error)
+      console.log(error);
+    }
+  })
+}
+export let getDocProfileById = (inputID) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      let data = await db.User.findOne({
+        where: {
+          id: inputID
+        },
+        attributes: {
+          exclude: ['password']
+        },
+        include: [
+          {
+            model: db.MarkDown,
+            attributes: ['description', 'htmlContent', 'markDownContent']
+          },
+          { model: db.Code, as: 'positionData', attributes: ['value_vi'] },
+          {
+            model: db.DocInfo,
+            attributes: {
+              exclude: ['id', 'docID']
+            },
+            include: [
+              { model: db.Code, as: 'priceTypeData', attributes: ['value_vi'] },
+              { model: db.Code, as: 'paymentTypeData', attributes: ['value_vi'] }
+            ]
+
+          }
+        ],
+        raw: false,
+        nest: true,
+      })
+      if (data && data.image) {
+        data.image = new Buffer(data.image, 'base64').toString('binary')
+      }
+      if (!data) data = []
+      resolve({
+        errCode: 0,
+        data: data
+      })
+    } catch (e) {
+      reject(e)
+      console.log(e);
     }
   })
 }

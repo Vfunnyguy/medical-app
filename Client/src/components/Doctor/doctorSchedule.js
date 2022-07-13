@@ -5,26 +5,28 @@ import {
     connect
 } from 'react-redux';
 import localization from 'moment/locale/vi'
-import { LanguageUtils } from "../../utils";
 import moment from "moment";
 import {
     getScheduleByDate
 } from "../../services/userService";
+import ModalBooking from '../booking/bookModal'
 class DoctorSchedule extends Component {
     constructor(props) {
         super(props)
         this.state = {
             allDays: [],
             valiableTime: [],
+            ishowModal: false,
+            timeModal: {}
         }
     }
     async componentDidMount() {
-      let allDays= this.getArrday()
-       this.setState({
-        allDays:allDays
-       })
+        let allDays = this.getArrday()
+        this.setState({
+            allDays: allDays
+        })
     }
-    getArrday=()=>{
+    getArrday = () => {
         let allDays = []
         for (let i = 0; i < 7; i++) {
             let obj = {}
@@ -42,8 +44,8 @@ class DoctorSchedule extends Component {
     }
     async componentDidUpdate(prevProps) {
         if (this.props.docIDF !== prevProps.docIDF) {
-            let allDays=this.getArrday()
-            let res = await getScheduleByDate(this.props.docIDF,allDays[0].value)
+            let allDays = this.getArrday()
+            let res = await getScheduleByDate(this.props.docIDF, allDays[0].value)
             this.setState({
                 valiableTime: res.data ? res.data : []
             })
@@ -60,11 +62,22 @@ class DoctorSchedule extends Component {
                     valiableTime: res.data ? res.data : []
                 })
             }
-            console.log(res);
+            
         }
     }
+    handleClickTime = (time) => {
+        this.setState({
+            ishowModal: true,
+            timeModal: time
+        })
+    }
+    onClose = () => {
+        this.setState({  
+            ishowModal: false
+        })
+    }
     render() {
-        let { allDays, valiableTime } = this.state
+        let { allDays, valiableTime,ishowModal, timeModal} = this.state
 
         return (
             <>
@@ -97,7 +110,7 @@ class DoctorSchedule extends Component {
                                 valiableTime.map((item, index) => {
                                     let timeDisplay = item.timeTypeData.value_vi
                                     return (
-                                        <button className=" button  is-primary ml-2 " key={index}>{timeDisplay}</button>
+                                        <button className=" button  is-primary ml-2 " key={index} onClick={()=>this.handleClickTime(item)}>{timeDisplay}</button>
                                     )
                                 })
                                 :
@@ -106,6 +119,11 @@ class DoctorSchedule extends Component {
 
                     </div>
                 </div>
+                <ModalBooking
+                    ishowModal={ishowModal}
+                    closeModal={this.onClose}
+                    timeData={timeModal}
+                />
             </>
         )
     }
