@@ -18,10 +18,10 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       htmlContent: {
-        type: Sequelize.STRING
+        type: Sequelize.TEXT('long')
       },
       markDownContent: {
-        type: Sequelize.STRING
+        type: Sequelize.TEXT('long')
       },
       description:{
         type:Sequelize.TEXT

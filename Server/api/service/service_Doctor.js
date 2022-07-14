@@ -223,7 +223,9 @@ export function getSchDate(docID, date) {
           model: db.Code,
           as: 'timeTypeData',
           attributes: ['value_vi']
-        }],
+        },
+      {model:db.User,as:'docData',attributes:['fullName']}
+      ],
         raw: false,
         nest: true
       })

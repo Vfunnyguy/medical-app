@@ -7,6 +7,7 @@ import Select from 'react-select'
 import { postBookingDoc } from '../../services/userService'
 import { toast } from 'react-toastify'
 import _ from 'lodash'
+import moment from 'moment'
 class ModalBooking extends Component {
     constructor(props) {
         super(props)
@@ -27,7 +28,7 @@ class ModalBooking extends Component {
         this.props.getGender()
     }
     selectDataGender = (data) => {
-        var result = []
+        let result = []
         if (data && data.length > 0) {
             data.map(item => {
                 let obj = {}
@@ -44,10 +45,10 @@ class ModalBooking extends Component {
                 genders: this.selectDataGender(this.props.genders)
             })
         }
-        if (this.props.dataTime !== prevProps.dataTime) {
-            if (this.props.dataTime && !_.isEmpty(this.props.dataTime)) {
-                let docID = this.props.dataTime.docID
-                let timeType = this.props.dataTime.timeType
+        if (this.props.timeData !== prevProps.timeData) {
+            if (this.props.timeData && !_.isEmpty(this.props.timeData)) {
+                let docID = this.props.timeData.docID
+                let timeType = this.props.timeData.timeType
                 this.setState({
                     docID: docID,
                     timeType: timeType
@@ -70,11 +71,28 @@ class ModalBooking extends Component {
     }
     handleChangeSelect = (selectOpt) => {
         this.setState({ selectGender: selectOpt })
-
     }
+    onTimeBooking=(timeData)=>{
+      if(timeData&&!_.isEmpty(timeData)){
+        let time=timeData.timeTypeData.value_vi
+        let date=moment.unix(+timeData.date/1000).format('dddd-DD/MM/YYYY')
+        return `${time}-${date}`
+      }
+     return ''
+    }
+    buildDocName=(timeData)=>{
+        if(timeData&&!_.isEmpty(timeData)){
+            let name=`${timeData.docData.fullName}`
+            return name
+        }
+        return ''
+    }
+
 
     handleConfirm = async () => {
         let date = new Date(this.state.birthday).getTime()
+        let timeString=this.onTimeBooking(this.props.timeData)
+        let docName=this.buildDocName(this.props.timeData)
         let res = await postBookingDoc({
             fullName: this.state.fullName,
             phoneNumber: this.state.phoneNumber,
@@ -85,6 +103,8 @@ class ModalBooking extends Component {
             selectGender: this.state.selectGender.value,
             docID: this.state.docID,
             timeType: this.state.timeType,
+            timeString:timeString,
+            docName:docName 
         })
         console.log(res);
         if (res && res.errCode === 0) {
@@ -96,9 +116,9 @@ class ModalBooking extends Component {
     }
     render() {
         let { ishowModal, closeModal, timeData } = this.props;
-        let docName = '';
-        if (timeData && _.isEmpty(timeData)) {
-            docName = timeData.docID
+        let docID=''
+        if (timeData && !_.isEmpty(timeData)){
+            docID=timeData.docID
         }
         console.log(this.state);
         return (
@@ -126,7 +146,7 @@ class ModalBooking extends Component {
                                 <div className="field">
                                     <label className="label">Số điện thoại</label>
                                     <div className="control">
-                                        <input className="input" type="number" placeholder="Điền số điện thoại" value={this.state.phoneNumber} onChange={(e) => this.handleOnChangeInput(e, 'phoneNumber')} />
+                                        <input className="input" type="text" placeholder="Điền số điện thoại" value={this.state.phoneNumber} onChange={(e) => this.handleOnChangeInput(e, 'phoneNumber')} />
                                     </div>
                                 </div>
                             </div>

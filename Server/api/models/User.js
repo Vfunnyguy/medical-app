@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       User.belongsTo(models.Code, {foreignKey:'gender',targetKey:'keyMap',as:'genderData'});
       User.hasOne(models.MarkDown,{foreignKey:"docID"})
       User.hasOne(models.DocInfo,{foreignKey:"docID"})
+      User.hasMany(models.Schedule,{foreignKey:'docID',as:'docData'})
 
     }
   }
