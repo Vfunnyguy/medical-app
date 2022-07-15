@@ -20,11 +20,11 @@ async function sendEmail(data){
             subject:'Thông tin đặt lịch khám bệnh',
             html:`
             <h1>Xin chào ${data.patientName}</h1>
-            <p>Chúc mừng bạn đã đặt lịch khám thành công trên tang web của chúng tôi</p>
+            <p>Chúc mừng bạn đã đặt lịch khám thành công trên trang web của chúng tôi</p>
             <h4>Thông tin lịch khám</h4>
             <span>Thời gian: <b>${data.time}</b></span><br/>
             <span>Bác sĩ: <b>${data.docName}</b></span>
-            <p>Link khám trưc tuyến:</p> <a href=${data.link} target='_blank'>Nhấn vào đây</a>
+            <a href='${data.confirmLink}'>Link xác nhận của bạn</a>
             <p>Xin chân thành  cảm ơn vì đã sủ dụng dịch vụ của chúng tôi</p>
             `
         })

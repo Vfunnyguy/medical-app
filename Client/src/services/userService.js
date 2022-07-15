@@ -54,6 +54,9 @@ const getProfileDocInfoById = (inputID) => {
 const postBookingDoc=(data)=>{
   return axios.post('/api/patient-booking-doctor',data)
 }
+const postVerifyBooking=(data)=>{
+  return axios.post('/api/verify-booking',data)
+}
 export {
   handleLoginApi,
   getAllUserApi,
@@ -70,4 +73,5 @@ export {
   getExtraInfoById,
   getProfileDocInfoById,
   postBookingDoc,
+  postVerifyBooking,
 };

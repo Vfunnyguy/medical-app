@@ -18,7 +18,7 @@ import HomePage from '../pages/home';
 import DocRoutes from '../routes/Doctor';
 import ConfirmModal from '../components/ConfirmModal';
 import Footer from './footer';
-
+import VerifyBooking from '../components/booking/verify'
 class App extends Component {
 
     handlePersistorState = () => {
@@ -54,6 +54,7 @@ class App extends Component {
                                 <Route path={'/doctor/'} component={userIsAuthenticated(DocRoutes)} />
                                 <Route path={path.HomePage} component={(HomePage)} />
                                 <Route path={path.DETAIL_DOCTOR} component={(DocDetail)} />
+                                <Route path={path.VERIFY_BOOKING} component={(VerifyBooking)} />
                             </Switch>
                             <Footer/>
                         </main>
