@@ -16,7 +16,7 @@ class VerifyBooking extends Component {
             let token = url.get('token')
             let docID = url.get('docID')
             let res = await postVerifyBooking({
-                Token: token,
+                token: token,
                 docID: docID
             })
             if (res && res.errCode === 0) {
@@ -47,10 +47,12 @@ class VerifyBooking extends Component {
                             </div>
                             :
                             <div>
-                                {+errCode === 0}?
+                            { +errCode === 1
+                                ?
                                 <h1 className='has-text-danger title is-3'>Xác nhận hẹn khám thành công</h1>
                                 :
                                 <h1 className='has-text-danger title is-3'>Xác nhận hẹn khám không thành công</h1>
+                            }
                             </div>
                     }
 

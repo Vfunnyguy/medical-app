@@ -40,7 +40,7 @@ export let handleBooking = (data) => {
                             patientID: user[0].id,
                             date: data.date,
                             timeType: data.timeType,
-                            Token:token
+                            token:token
                         }
                     })
                 }
@@ -68,7 +68,7 @@ export async function handleVerify(data){
                 let appointment=await db.Booking.findOne({
                     where:{
                         docID:data.docID,
-                        Token:data.token
+                        token:data.token
                     },
                 })
                 if(appointment){

@@ -23,7 +23,7 @@ async function sendEmail(data){
             <p>Chúc mừng bạn đã đặt lịch khám thành công trên trang web của chúng tôi</p>
             <h4>Thông tin lịch khám</h4>
             <span>Thời gian: <b>${data.time}</b></span><br/>
-            <span>Bác sĩ: <b>${data.docName}</b></span>
+            <span>Bác sĩ: <b>${data.docName}</b></span><br/>
             <a href='${data.confirmLink}'>Link xác nhận của bạn</a>
             <p>Xin chân thành  cảm ơn vì đã sủ dụng dịch vụ của chúng tôi</p>
             `

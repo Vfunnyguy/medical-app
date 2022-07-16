@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Search from '../Input/search'
 class HeaderHome extends Component {
 
   render() {
@@ -39,12 +40,7 @@ class HeaderHome extends Component {
 
           <div className="navbar-end">
             <div className="navbar-item">
-              <div className="control has-icons-left">
-                <input className="input" type="text" placeholder="Tìm Kiếm" />
-                <span className='icon is-small is-left'>
-                  <i className="fas fa-search    "></i>
-                </span>
-              </div>
+              <Search/>
             </div>
 
           </div>
