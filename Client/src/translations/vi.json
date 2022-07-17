@@ -39,7 +39,8 @@
         },
         "doctor":{
             "manage": "Quản lý ",
-            "manage-schedule":"Quản lý lịch khám"
+            "manage-schedule":"Quản lý lịch khám",
+            "manage-patient":"Quản lý lịch khám bệnh nhân"
         }
     },
     "system": {

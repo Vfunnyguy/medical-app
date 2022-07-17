@@ -61,7 +61,7 @@ export var updateUserData = async (data) => {
         user.address = data.address;
         await user.save();
         resolve()
-      }else{
+      } else {
         resolve();
 
       }
@@ -73,19 +73,19 @@ export var updateUserData = async (data) => {
     }
   });
 };
-export const deleteUser =  (userID) => {
-return new Promise(async(resolve, reject) => { 
-  try{
-    let user=await db.User.findOne({
-      where:{id:userID}
-    })
-    if(user){
-      await user.destroy();
-    }
+export const deleteUser = (userID) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      let user = await db.User.findOne({
+        where: { id: userID }
+      })
+      if (user) {
+        await user.destroy();
+      }
       resolve();
-  }catch(error){
-    reject(error);
-  }
-})
+    } catch (error) {
+      reject(error);
+    }
+  })
 
 }

@@ -66,6 +66,7 @@ class Login extends Component {
     }
   }
   render() {
+    console.log(this.state);
     return (
       <div className="login-page  ">
         <div className="columns is-vcentered">
@@ -142,7 +143,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     navigate: (path) => dispatch(push(path)),
-    // userLoginFail: () => dispatch(actions.adminLoginFail()),
     userLoginSuccess: (userInfo) => dispatch(actions.userLoginSuccess(userInfo)),
   };
 };

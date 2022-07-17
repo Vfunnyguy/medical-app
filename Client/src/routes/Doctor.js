@@ -2,6 +2,7 @@ import React ,{Component}from 'react'
 import{ connect }from 'react-redux'
 import {Redirect,Route,Switch}from 'react-router-dom'
 import ManageSchedule from '../components/Doctor/manageSchedule'
+import ManagePatient from '../components/Doctor/managePatient'
 import Header from '../containers/Header/Header'
 class DocRoutes extends Component{
     render(){
@@ -15,6 +16,7 @@ class DocRoutes extends Component{
                 <div className="section column">
                 <Switch>
                 <Route path='/doctor/manage-schedule' component={ManageSchedule}/>
+                <Route path='/doctor/manage-patient' component={ManagePatient}/>
                 </Switch>
                 </div>
             </div>

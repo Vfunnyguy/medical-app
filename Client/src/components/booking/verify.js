@@ -19,6 +19,7 @@ class VerifyBooking extends Component {
                 token: token,
                 docID: docID
             })
+            console.log(res);
             if (res && res.errCode === 0) {
                 this.setState({
                     statusData: true,
@@ -47,7 +48,7 @@ class VerifyBooking extends Component {
                             </div>
                             :
                             <div>
-                            { +errCode === 1
+                            { +errCode === 0
                                 ?
                                 <h1 className='has-text-danger title is-3'>Xác nhận hẹn khám thành công</h1>
                                 :

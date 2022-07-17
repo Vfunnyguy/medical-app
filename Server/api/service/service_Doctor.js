@@ -1,6 +1,7 @@
 import db from '../models/index';
 
 import _ from 'lodash'
+import Code from '../models/Code';
 var MAX_SCH = process.env.MAX_NUMBER_SCHEDULE
 export var getTopDoctor = (limitIn) => {
   return new Promise(async (resolve, reject) => {
@@ -224,8 +225,8 @@ export function getSchDate(docID, date) {
           as: 'timeTypeData',
           attributes: ['value_vi']
         },
-      {model:db.User,as:'docData',attributes:['fullName']}
-      ],
+        { model: db.User, as: 'docData', attributes: ['fullName'] }
+        ],
         raw: false,
         nest: true
       })
@@ -312,6 +313,45 @@ export let getDocProfileById = (inputID) => {
     } catch (e) {
       reject(e)
       console.log(e);
+    }
+  })
+}
+export let getPatient = (docID, date) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (!docID || !date) {
+        resolve({
+          errCode: 1,
+          msg: 'not found'
+        })
+      } 
+      else {
+        let data = await db.Booking.findAll({
+          where: {
+            statusID: 'S2',
+            docID: docID,
+            date: date
+          },
+          include: [
+            {
+              model: db.User, as: 'patientData',
+              attributes: ['email', 'fullName', 'gender'],
+              include: [{
+                model: db.Code, as: 'genderData', attributes: ['value_vi']
+              }]
+            },
+            { model: db.Code, as: 'timeTypeDataPatient', attributes: ['value_vi'] }
+          ],
+          raw: false,
+          nest: true
+        })
+        resolve({
+          errCode: 0,
+          data: data
+        })
+      }
+    } catch (error) {
+      reject(error)
     }
   })
 }

@@ -57,6 +57,9 @@ const postBookingDoc=(data)=>{
 const postVerifyBooking=(data)=>{
   return axios.post('/api/verify-booking',data)
 }
+const getPatientList=(docID,date)=>{
+  return axios.get(`/api/get-patient-list?docId=${docID}&date=${date}`)
+}
 export {
   handleLoginApi,
   getAllUserApi,
@@ -74,4 +77,5 @@ export {
   getProfileDocInfoById,
   postBookingDoc,
   postVerifyBooking,
+  getPatientList
 };

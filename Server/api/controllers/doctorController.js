@@ -6,7 +6,8 @@ import {
   bulkScheduleCreate,
   getSchDate,
   getDocExtra,
-  getDocProfileById
+  getDocProfileById,
+  getPatient
 } from '../service/service_Doctor';
 const doctorController = {
   getTopDoctors: async (req, res) => {
@@ -43,7 +44,7 @@ const doctorController = {
         errCode: -1,
         message: 'Internal server error',
       });
-      
+
     }
   },
   getDoctorDetailById: async (req, res) => {
@@ -73,7 +74,7 @@ const doctorController = {
   },
   getScheduleByDate: async (req, res) => {
     try {
-      let data= await getSchDate(req.query.docID, req.query.date)
+      let data = await getSchDate(req.query.docID, req.query.date)
       return res.status(200).json(data)
     } catch (e) {
       console.log(e);
@@ -83,24 +84,33 @@ const doctorController = {
       })
     }
   },
-  getExtraInfo:async(req,res)=>{
+  getExtraInfo: async (req, res) => {
     try {
-      let response=await getDocExtra(req.query.docID)
+      let response = await getDocExtra(req.query.docID)
       return res.status(200).json(response)
     } catch (e) {
       console.log(e);
       return res.status(500).send('server error')
     }
   },
-  getProfileDoc:async(req,res)=>{
+  getProfileDoc: async (req, res) => {
     try {
-      let data=await getDocProfileById(req.query.docID)
+      let data = await getDocProfileById(req.query.docID)
       return res.status(200).json(data)
     } catch (e) {
       return res.status(500).json({
-        errCode:1,
-        errMsg:'error from server',e
+        errCode: 1,
+        errMsg: 'error from server', e
       })
+    }
+  },
+  getPatientList: async (req, res) => {
+    try {
+      let data = await getPatient(req.query.docID, req.query.date)
+      return res.status(200).json(data)
+    } catch (error) {
+      console.log(error);
+      return res.status(500).send('error')
     }
   }
 };

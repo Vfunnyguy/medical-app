@@ -2,13 +2,12 @@ import db from '../models/index';
 import  sendEmail  from '../utils/email';
 import { v4 as uuidv4} from 'uuid'
 let urlEmail=(docID,token)=>{
-    var result=`${process.env.APP_URL}/verify-booking?token=${token}$docID=${docID}`
+    var result=`${process.env.APP_URL}/verify-booking?token=${token}&docID=${docID}`
     return result
 }
 export let handleBooking = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
-            console.log(data);
             if (!data.email) {
                 resolve({
                     errCode: 1,
@@ -28,7 +27,10 @@ export let handleBooking = (data) => {
                     where: { email: data.email },
                     defaults: {
                         email: data.email,
-                        roleID: 'R3'
+                        roleID: 'R3',
+                        gender:data.selectGender,
+                        address:data.address,
+                        fullName:data.fullName
                     }
                 })
                 if (user && user[0]) {
@@ -68,9 +70,12 @@ export async function handleVerify(data){
                 let appointment=await db.Booking.findOne({
                     where:{
                         docID:data.docID,
-                        token:data.token
+                        token:data.token,
+                        statusID:'S1'
                     },
+                    raw:false
                 })
+                console.log(appointment);
                 if(appointment){
                     appointment.statusID='S2'
                     await appointment.save()

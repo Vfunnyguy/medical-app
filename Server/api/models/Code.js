@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       Code.hasMany(models.Schedule, {foreignKey:'timeType',as:'timeTypeData'});
       Code.hasMany(models.DocInfo,{foreignKey:'priceID',as:'priceTypeData'})
       Code.hasMany(models.DocInfo,{foreignKey:'paymentID',as:'paymentTypeData'})
+      Code.hasMany(models.Booking,{foreignKey:'timeType',as:'timeTypeDataPatient'})
     }
   }
   Code.init(
