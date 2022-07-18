@@ -22,6 +22,8 @@ class ModalBooking extends Component {
             docID: '',
             genders: '',
             timeType: '',
+            bank:"",
+            image:''
         }
     }
     async componentDidMount() {
@@ -48,9 +50,11 @@ class ModalBooking extends Component {
         if (this.props.timeData !== prevProps.timeData) {
             if (this.props.timeData && !_.isEmpty(this.props.timeData)) {
                 let docID = this.props.timeData.docID
+                let bank=this.props.timeData.description
                 let timeType = this.props.timeData.timeType
                 this.setState({
                     docID: docID,
+                    bank:bank,
                     timeType: timeType
                 })
             }
@@ -105,7 +109,8 @@ class ModalBooking extends Component {
             docID: this.state.docID,
             timeType: this.state.timeType,
             timeString:timeString,
-            docName:docName 
+            docName:docName ,
+            bank:this.state.bank
         })
         console.log(res);
         if (res && res.errCode === 0) {
@@ -118,8 +123,10 @@ class ModalBooking extends Component {
     render() {
         let { ishowModal, closeModal, timeData } = this.props;
         let docID=''
+        let bank=''
         if (timeData && !_.isEmpty(timeData)){
             docID=timeData.docID
+            bank=timeData.bank
         }
         console.log(this.state);
         return (
@@ -203,6 +210,12 @@ class ModalBooking extends Component {
                             <label className="label">Lý do khám</label>
                             <div className="control">
                                 <textarea className="textarea" placeholder="Điền lý do khám" value={this.state.reason} onChange={(e) => this.handleOnChangeInput(e, 'reason')}></textarea>
+                            </div>
+                        </div>
+                        <div className="field">
+                            <label className="label">Hình ảnh </label>
+                            <div className="control">
+                                <input className="input" type='file' accept='image/*' placeholder="tải hình ảnh" value={this.state.image} onChange={(e) => this.handleOnChangeInput(e, 'image')}/>
                             </div>
                         </div>
                         <div className="field is-grouped">

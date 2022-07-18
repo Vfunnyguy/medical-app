@@ -13,9 +13,8 @@ async function sendEmail(data){
                 rejectUnauthorized: false,
               },
         })
-
         let info=await tranport.sendMail({
-            from:`${process.env.MAIL_USER}`,
+            from:`Booking Medical`,
             to:data.recivermail,
             subject:'Thông tin đặt lịch khám bệnh',
             html:`
@@ -24,7 +23,9 @@ async function sendEmail(data){
             <h4>Thông tin lịch khám</h4>
             <span>Thời gian: <b>${data.time}</b></span><br/>
             <span>Bác sĩ: <b>${data.docName}</b></span><br/>
-            <a href='${data.confirmLink}'>Link xác nhận của bạn</a>
+            <p>Bạn vui lòng thanh toán hóa đơn và gửi bill thanh toán vào mail này để nhận link khám trực tuyến</p>
+            <b> Số tài khoản 0909088656</b>
+            <a href='${process.env.GG_MEET_LINK}'>Link khám trực tuyến của bạn</a>
             <p>Xin chân thành  cảm ơn vì đã sủ dụng dịch vụ của chúng tôi</p>
             `
         })

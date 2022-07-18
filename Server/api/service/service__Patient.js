@@ -21,6 +21,7 @@ export let handleBooking = (data) => {
                 time:data.timeString,
                 docName:data.docName,
                 confirmLink:urlEmail(data.docID,token),
+                bank:data.bank
                 //link:'https://www.digitalocean.com/community/tutorials/how-to-add-login-authentication-to-react-applications'
                })
                 let user = await db.User.findOrCreate({
@@ -61,7 +62,7 @@ export let handleBooking = (data) => {
 export async function handleVerify(data){
     return new Promise(async(resolve, reject) => {
         try {
-            if(!data.token||!data.docID){
+            if(!data.token || !data.docID){
                 resolve({
                     errCode:1,
                     msg:'not found params'

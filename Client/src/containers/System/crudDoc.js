@@ -234,11 +234,11 @@ class DocInfo extends Component {
 
           </div>
           <div className="block">
-            <span className="is-4 fw-bold">Thông tin giới thiệu</span>
-            <textarea className="textarea is-info"
+            <span className="is-4 fw-bold">Số tài khoản ngân hàng</span>
+            <input className="input is-info"
               value={this.state.description}
               onChange={(e) => this.onChangeText(e, 'description')}
-            ></textarea>
+            />
           </div>
           <MdEditor
             style={{ height: '500px', width: '100%' }}
